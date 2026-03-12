@@ -1,0 +1,139 @@
+POLÍTICA DE GASTOS Y PRESUPUESTO
+Empresa: TechCorp SaaS
+Última actualización: enero de 2025
+
+SECCIÓN 1: DESCRIPCIÓN GENERAL DEL REEMBOLSO DE GASTOS
+
+TechCorp reembolsa a los empleados los gastos razonables y necesarios incurridos en el desempeño de sus funciones. Todos los gastos deben enviarse a través de la plataforma Expensify dentro de los 30 días de haberse incurrido. Las presentaciones tardías pueden no ser reembolsadas.
+
+Principios generales para el reembolso de gastos:
+- Los gastos deben tener justificación de negocio y estar directamente relacionados con actividades laborales
+- Los empleados deben elegir la opción más económica disponible
+- Los gastos personales no son reembolsables bajo ninguna circunstancia
+- Los gastos deben respaldarse con comprobantes originales
+- Los gastos superiores a $5.000 ARS requieren comprobantes detallados
+
+SECCIÓN 2: GASTOS DE VIAJE
+
+Los empleados que viajan por motivos laborales deben reservar a través del portal de viajes corporativo (Concur) para aprovechar las tarifas negociadas.
+
+Transporte aéreo:
+- Vuelos de cabotaje: se requiere clase económica para vuelos de menos de 5 horas
+- Vuelos internacionales: se requiere clase económica; se permite clase ejecutiva para vuelos de más de 8 horas con aprobación del VP
+- Los vuelos deben reservarse con al menos 14 días de anticipación cuando sea posible
+- Los upgrades no son reembolsables salvo que se requieran por cabina completa en economía
+
+Transporte terrestre:
+- Aplicaciones de transporte (Uber/Cabify) son reembolsables; uso de vehículo personal se reembolsa por km según tarifa vigente
+- Autos de alquiler: solo categoría económica; SUVs y vehículos premium requieren aprobación del responsable
+- Se prefiere el transporte público cuando sea práctico
+- Estacionamiento en aeropuertos: se prefieren playas económicas; el valet no es reembolsable
+
+Alojamiento:
+- Hoteles: hasta $15.000 ARS por noche en mercados estándar, hasta $25.000 ARS por noche en mercados de alto costo (Buenos Aires, Córdoba, Mendoza; o ciudades internacionales principales)
+- Se espera que los empleados se ajusten a estos límites; las excepciones requieren aprobación del responsable
+- Airbnb permitido con aprobación previa del responsable
+- Las reservas deben realizarse a través de Concur o requerir aprobación del responsable
+
+SECCIÓN 3: GASTOS DE COMIDAS Y ENTRETENIMIENTO
+
+Comidas durante viajes de negocios:
+- Desayuno: hasta $1.500 ARS
+- Almuerzo: hasta $3.000 ARS
+- Cena: hasta $5.000 ARS
+- Límite diario total de comidas: $9.500 ARS (excluye alcohol)
+
+Comidas de negocios con clientes o socios:
+- Deben tener una finalidad comercial clara documentada en Expensify
+- Deben listar a todos los asistentes con su empresa y rol
+- El alcohol es reembolsable durante entretenimiento de clientes en un monto razonable
+- Las comidas que superen $15.000 ARS por persona requieren aprobación del VP
+
+Comidas y entretenimiento de equipo:
+- Almuerzos de equipo: hasta $2.500 ARS por persona, requiere aprobación del responsable
+- Salidas de equipo: presupuesto definido por Finanzas por evento
+- Fiestas de fin de año y eventos de equipo: presupuesto gestionado por RRHH
+
+SECCIÓN 4: GASTOS DE TECNOLOGÍA Y SOFTWARE
+
+Los empleados no pueden adquirir software o herramientas tecnológicas de forma independiente. Todas las compras de tecnología deben pasar por IT. Excepciones:
+- Compras en tiendas de aplicaciones de menos de $1.000 ARS/mes con aprobación del responsable
+- Aplicaciones específicas de conferencias con aprobación del responsable
+
+Para hardware, ver la Política de Equipamiento de IT. El hardware comprado de forma independiente sin aprobación de IT no será reembolsado.
+
+El subsidio para home office de $50.000 ARS/año está disponible para empleados remotos e híbridos. Las compras elegibles incluyen monitores, teclados, sillas y accesorios de escritorio. Los comprobantes deben enviarse a través de Expensify en la categoría Home Office.
+
+SECCIÓN 5: GASTOS DE CONFERENCIAS Y CAPACITACIÓN
+
+TechCorp apoya el desarrollo profesional de los empleados mediante la asistencia a conferencias y capacitaciones:
+
+Presupuesto de capacitación: $200.000 ARS por empleado por año (incluido en beneficios)
+Presupuesto de conferencias: requiere aprobación separada por evento
+
+Para asistir a conferencias:
+1. Enviar un formulario de Solicitud de Conferencia a través del portal de RRHH
+2. Incluir justificación del negocio y costo total estimado
+3. Requiere aprobación del responsable y de Finanzas para eventos que superen $100.000 ARS
+4. La inscripción, el transporte y el alojamiento se incluyen en el presupuesto de conferencias
+5. Enviar todos los comprobantes dentro de las 2 semanas del regreso
+
+Cursos en línea y certificaciones: cubiertos bajo el presupuesto de $200.000 ARS de capacitación. Enviar comprobante de inscripción/aprobación a RRHH.
+
+SECCIÓN 6: PROCESO DE PRESENTACIÓN DE GASTOS
+
+Para enviar un gasto para reembolso:
+1. Ingresar a Expensify en expensify.techcorp.interno
+2. Crear un nuevo informe de gastos
+3. Adjuntar comprobantes originales (foto o PDF)
+4. Seleccionar la categoría de gasto y el centro de costos del proyecto correctos
+5. Agregar una nota de justificación para gastos superiores a $10.000 ARS
+6. Enviar al responsable directo para aprobación
+7. El responsable aprueba y deriva a Finanzas
+8. Finanzas procesa los gastos aprobados dentro de los 10 días hábiles
+9. El reembolso se acredita junto con el próximo pago de haberes
+
+Los gastos enviados sin comprobantes no serán reembolsados. Los empleados que reiteradamente presenten informes tardíos o incompletos tendrán sus privilegios de gastos revisados.
+
+SECCIÓN 7: TARJETAS CORPORATIVAS
+
+Los empleados senior (Nivel 4 en adelante) y los empleados que viajan con frecuencia pueden recibir una tarjeta corporativa. Requisitos:
+- Presentar conciliación mensual en Expensify antes del día 5 de cada mes
+- Todos los cargos deben tener comprobantes y justificaciones correspondientes
+- Los cargos personales en tarjetas corporativas deben reintegrarse dentro de los 15 días
+- Las tarjetas perdidas deben reportarse a Finanzas de inmediato
+- Límites de tarjeta: $500.000 ARS estándar; límites superiores requieren aprobación del CFO
+
+SECCIÓN 8: GESTIÓN DEL PRESUPUESTO
+
+Los presupuestos por área se definen anualmente durante el ciclo de planificación del Q4:
+1. Finanzas proporciona lineamientos presupuestarios y objetivos corporativos
+2. Los jefes de área presentan sus solicitudes antes del 15 de noviembre
+3. Finanzas revisa y negocia ajustes
+4. Los presupuestos finales son aprobados por el CFO y el CEO antes del 15 de diciembre
+5. Los presupuestos se activan el 1 de enero
+
+Los responsables del presupuesto (jefes de área) son responsables de:
+- Hacer seguimiento mensual del gasto frente al presupuesto
+- Alertar a Finanzas ante desvíos superiores al 10%
+- Solicitar modificaciones presupuestarias a Finanzas antes de exceder el presupuesto
+- Proporcionar justificación para gastos significativos no planificados
+
+SECCIÓN 9: PAGOS A PROVEEDORES Y COMPRAS
+
+Todos los contratos con proveedores superiores a $1.000.000 ARS requieren:
+- Cotizaciones de al menos 3 proveedores (o justificación documentada para proveedor único)
+- Revisión legal para contratos superiores a $5.000.000 ARS
+- Aprobación del CFO para contratos superiores a $10.000.000 ARS
+- Aprobación del CEO para contratos superiores a $50.000.000 ARS
+
+Condiciones de pago: estándar a 30 días. Los descuentos por pago anticipado deben aprovecharse cuando el descuento supera el costo del capital. Los nuevos proveedores deben completar el proceso de alta en Finanzas antes de que se puedan procesar sus facturas.
+
+SECCIÓN 10: CONTROLES FINANCIEROS Y AUDITORÍA
+
+TechCorp mantiene controles financieros estrictos:
+- Segregación de funciones: ningún empleado aprueba sus propios gastos
+- Auditorías aleatorias del 10% de todos los informes de gastos realizadas mensualmente por Finanzas
+- Auditoría externa anual realizada por una firma auditora independiente
+- Los empleados que presenten gastos fraudulentos serán desvinculados de inmediato y podrán enfrentar acciones legales
+- Línea de ética disponible en etica.techcorp.com para reportar irregularidades financieras de forma anónima

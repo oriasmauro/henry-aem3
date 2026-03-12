@@ -1,0 +1,153 @@
+POLÍTICA DE CONTRATOS Y CUMPLIMIENTO LEGAL
+Empresa: TechCorp SaaS
+Última actualización: enero de 2025
+
+SECCIÓN 1: DESCRIPCIÓN GENERAL DE GESTIÓN DE CONTRATOS
+
+Todos los contratos celebrados en nombre de TechCorp deben ser revisados y aprobados por el equipo Legal antes de su firma. Ningún empleado tiene autoridad para firmar un contrato en nombre de TechCorp salvo que haya recibido autorización del CEO o del CFO.
+
+Niveles de autorización para firma:
+- Contratos hasta $1.000.000 ARS: Jefe de Área
+- Contratos hasta $5.000.000 ARS: nivel VP
+- Contratos hasta $50.000.000 ARS: CFO
+- Contratos superiores a $50.000.000 ARS: CEO
+- Cualquier contrato con responsabilidad ilimitada o cesión de propiedad intelectual: requiere revisión del Gerente Legal
+
+Los contratos deben almacenarse en el sistema de gestión de contratos (DocuSign CLM) dentro de los 5 días hábiles de su ejecución. Los contratos en papel deben escanearse y cargarse al sistema.
+
+SECCIÓN 2: PROCESO DE REVISIÓN DE CONTRATOS
+
+Para iniciar una revisión de contrato:
+1. Enviar una Solicitud Legal a través del portal Legal en legal.techcorp.interno
+2. Adjuntar el documento contractual e información de contexto relevante
+3. Especificar el propósito comercial, la contraparte y los términos clave
+4. Indicar la urgencia y la fecha deseada de firma
+5. El equipo Legal acusa recibo dentro de 1 día hábil
+6. La revisión estándar se completa dentro de los 5 días hábiles
+7. Los contratos complejos (enterprise, partnerships, M&A) se revisan dentro de los 10 días hábiles
+
+Las revisiones urgentes (menos de 48 horas) están disponibles en casos de genuina emergencia y requieren aprobación del VP. Legal se reserva el derecho de rechazar solicitudes urgentes que no cumplan el umbral de urgencia.
+
+SECCIÓN 3: PLANTILLAS ESTÁNDAR DE CONTRATOS
+
+El equipo Legal mantiene plantillas aprobadas para los acuerdos más comunes:
+- NDA mutuo (versiones bilateral y unilateral)
+- Acuerdo Marco de Servicios (MSA)
+- Plantilla de Declaración de Trabajo (SOW)
+- Contrato de Suscripción SaaS
+- Acuerdo con Proveedores
+- Contrato de Prestación de Servicios Independiente
+- Acuerdo de Procesamiento de Datos (DPA)
+- Acuerdo de Partnership
+
+Las plantillas están disponibles en el portal Legal. El uso de plantillas aprobadas reduce el tiempo de revisión a 2 días hábiles. No modificar las plantillas sin aprobación de Legal.
+
+SECCIÓN 4: PRIVACIDAD DE DATOS Y CUMPLIMIENTO DE LEGISLACIÓN APLICABLE
+
+TechCorp está comprometida con el cumplimiento de las leyes de protección de datos aplicables, incluyendo la Ley 25.326 de Protección de Datos Personales (Argentina), GDPR (UE), CCPA (California) y LGPD (Brasil).
+
+Principios de tratamiento de datos:
+- Tratar datos personales solo para fines específicos, explícitos y legítimos
+- Recolectar únicamente los datos mínimos necesarios para el fin declarado
+- Garantizar la exactitud de los datos y proveer mecanismos de corrección
+- Conservar los datos solo mientras sea necesario según el calendario de retención
+- Implementar medidas de seguridad técnicas y organizativas adecuadas
+- Respetar los derechos de los titulares de datos (acceso, supresión, portabilidad, oposición)
+
+Solicitudes de derechos de titulares de datos (acceso, supresión, portabilidad):
+1. Derivar todas las solicitudes a privacidad@techcorp.com
+2. Verificar la identidad del solicitante dentro de los 5 días hábiles
+3. Atender la solicitud dentro de los 30 días (GDPR) o 45 días (CCPA / Ley 25.326)
+4. Documentar todas las solicitudes y respuestas en el Registro de Solicitudes de Privacidad
+
+Respuesta ante brechas de datos:
+- Notificación interna a Legal y Seguridad dentro de 1 hora de la detección
+- Notificación a la autoridad de control bajo GDPR dentro de las 72 horas si corresponde
+- Notificación a clientes dentro de las 72 horas si datos personales están en riesgo
+- El incidente debe documentarse y completarse una revisión post-incidente dentro de los 30 días
+
+SECCIÓN 5: POLÍTICA DE PROPIEDAD INTELECTUAL
+
+Toda la propiedad intelectual creada por los empleados en el ejercicio de sus funciones pertenece a TechCorp. Esto incluye:
+- Código fuente, software y algoritmos
+- Invenciones, patentes y secretos comerciales
+- Materiales de marketing y contenido creativo
+- Diseños y especificaciones de productos
+- Bases de datos y estructuras de datos
+
+Los empleados deben declarar cualquier invención o trabajo creativo desarrollado usando tiempo o recursos de la empresa dentro de los 30 días de su creación, mediante el Formulario de Declaración de PI a Legal.
+
+Uso de código abierto (open source):
+- Las bibliotecas de código abierto deben revisarse para verificar compatibilidad de licencia antes de su uso
+- El código bajo licencia GPL no puede incorporarse a productos propietarios de TechCorp sin aprobación de Legal
+- Las licencias MIT, Apache 2.0 y BSD están pre-aprobadas para su uso
+- Todas las dependencias open source deben registrarse en el inventario de software (SBOM)
+
+SECCIÓN 6: ACUERDOS DE CONFIDENCIALIDAD (NDA)
+
+TechCorp requiere NDAs en las siguientes situaciones:
+- Antes de compartir información propietaria del producto con prospectos o socios
+- Antes de involucrar contratistas o consultores con acceso a información confidencial
+- Durante procesos de due diligence de M&A
+- Antes de participar en joint ventures o integraciones técnicas
+
+Los NDAs estándar son mutuos y tienen una vigencia de 3 años. Los NDAs a perpetuidad o con vigencia superior a 5 años requieren aprobación del Gerente Legal. Los empleados están individualmente sujetos a las cláusulas de confidencialidad de sus contratos de trabajo.
+
+SECCIÓN 7: CUMPLIMIENTO REGULATORIO
+
+TechCorp opera bajo varios marcos regulatorios:
+
+SOC 2 Tipo II:
+- Auditoría anual realizada por auditor externo
+- Los controles cubren seguridad, disponibilidad, integridad del procesamiento, confidencialidad y privacidad
+- El informe de auditoría está disponible para clientes enterprise bajo NDA
+- Todos los empleados deben completar la capacitación de concientización en seguridad anualmente
+
+ISO 27001:
+- Certificación mantenida para la plataforma SaaS principal
+- El Sistema de Gestión de Seguridad de la Información (SGSI) se revisa anualmente
+- El alcance cubre todos los sistemas de producción y procesos de soporte
+
+Normativa de Protección de Datos Personales (Ley 25.326):
+- Bases de datos con datos personales registradas ante la Dirección Nacional de Protección de Datos Personales (DNPDP)
+- Responsable de Datos designado e identificado
+- Contratos de encargado de tratamiento firmados con todos los proveedores que procesan datos personales
+
+PCI DSS (para procesamiento de pagos):
+- Los datos de tarjetas son manejados exclusivamente por Stripe (certificado PCI DSS Nivel 1)
+- TechCorp no almacena, procesa ni transmite datos de titulares de tarjetas
+- SAQ-A completado anualmente por Finanzas y Seguridad
+
+SECCIÓN 8: CUMPLIMIENTO LABORAL
+
+RRHH y Legal gestionan conjuntamente el cumplimiento laboral:
+- Contratos de trabajo elaborados usando plantillas específicas por jurisdicción y convenio colectivo aplicable
+- Cláusulas de no competencia revisadas en cuanto a su validez legal
+- Los antecedentes laborales se verifican en cumplimiento de la normativa vigente
+- El cumplimiento de las normas laborales (LCT, convenios colectivos) se revisa anualmente con asesoramiento externo
+- El cumplimiento de la normativa de higiene y seguridad en el trabajo (Ley 19.587) es monitoreado por RRHH
+
+Todos los asuntos legales relacionados con el empleo (disputas, reclamos, inspecciones) deben escalarse de inmediato a Legal. No responder a intimaciones o comunicaciones legales laborales sin la intervención de Legal.
+
+SECCIÓN 9: LITIGIOS Y DISPUTAS
+
+Si TechCorp recibe una demanda judicial, intimación o amenaza de litigio:
+1. Preservar de inmediato todos los documentos potencialmente relevantes (medida cautelar de preservación)
+2. Notificar a Legal dentro de las 24 horas
+3. No comentar el asunto con las contrapartes sin la presencia de Legal
+4. No eliminar ni modificar ningún documento relevante
+5. Colaborar plenamente con la investigación de Legal
+
+Los empleados no deben intentar resolver disputas legales de forma independiente. Todas las negociaciones con demandantes deben ser conducidas por Legal o bajo su supervisión.
+
+SECCIÓN 10: CÓDIGO DE CONDUCTA Y ÉTICA
+
+El Código de Conducta de TechCorp aplica a todos los empleados, contratistas y directores:
+- Actuar con integridad y honestidad en todos los negocios
+- Evitar conflictos de interés; declarar cualquier conflicto potencial a Legal
+- No aceptar regalos superiores a $20.000 ARS de proveedores o clientes sin aprobación
+- No participar en sobornos ni prácticas corruptas bajo ninguna circunstancia
+- Reportar posibles violaciones a la Línea de Ética en etica.techcorp.com
+- Las represalias contra denunciantes están terminantemente prohibidas y acarrean desvinculación inmediata
+
+La aceptación anual del Código de Conducta es obligatoria para todos los empleados. Las violaciones son investigadas por RRHH y Legal y pueden resultar en desvinculación o acciones legales.

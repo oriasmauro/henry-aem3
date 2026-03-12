@@ -1,0 +1,124 @@
+POLÍTICA DE INCORPORACIÓN Y DESVINCULACIÓN
+Empresa: TechCorp SaaS
+Última actualización: enero de 2025
+
+SECCIÓN 1: PRE-INCORPORACIÓN (ANTES DEL PRIMER DÍA)
+
+Una vez que el candidato acepta la oferta, el equipo de RRHH inicia el proceso de pre-incorporación:
+- Verificación de antecedentes iniciada dentro de las 24 horas de la aceptación
+- Correo de bienvenida enviado con instrucciones para el primer día, información de acceso y código de vestimenta
+- Ticket de IT creado para provisionar laptop, cuenta de correo y licencias de software necesarias
+- Credenciales de acceso a sistemas centrales preparadas con anticipación
+- Se asigna un compañero (buddy) del equipo del nuevo empleado para acompañarlo durante sus primeros 30 días
+- El responsable es notificado para preparar el plan de incorporación de 30-60-90 días
+
+El equipamiento se envía o queda disponible para retiro 2 días hábiles antes de la fecha de inicio. Los empleados remotos reciben el equipamiento en su domicilio.
+
+SECCIÓN 2: LISTA DE VERIFICACIÓN DEL PRIMER DÍA
+
+El primer día, RRHH coordina lo siguiente:
+- Reunión de bienvenida con RRHH para completar documentación y revisar políticas
+- Recorrido por las instalaciones e introducción al equipo (o equivalente virtual para empleados remotos)
+- Sesión de configuración con IT para equipos y credenciales de acceso
+- Presentación de herramientas clave: Slack, Jira, Confluence, portal de RRHH, sistema de gastos
+- Reunión con el responsable directo para revisar expectativas del puesto y plan de 30-60-90 días
+- Completar los módulos de capacitación obligatoria de cumplimiento
+
+Toda la documentación debe completarse el primer día: formularios impositivos, datos para acreditación de haberes, contacto de emergencia y formularios de inscripción en beneficios.
+
+SECCIÓN 3: PROGRAMA DE LOS PRIMEROS 90 DÍAS
+
+El programa estructurado de incorporación de TechCorp abarca los primeros 90 días:
+
+Días 1 a 30 (Aprender):
+- Completar todos los módulos de capacitación obligatoria
+- Acompañar a miembros del equipo para comprender los flujos de trabajo
+- Reunirse con todos los stakeholders clave
+- Completar la lista de verificación de incorporación del área
+- Reuniones semanales de seguimiento con el responsable
+
+Días 31 a 60 (Contribuir):
+- Comenzar a asumir tareas asignadas con orientación
+- Participar en reuniones del equipo y planificación de proyectos
+- Establecer OKR individuales para el trimestre en curso
+- Completar la capacitación técnica específica del rol
+- Reuniones quincenales de seguimiento con el responsable
+
+Días 61 a 90 (Rendir):
+- Trabajar de forma independiente en las tareas asignadas
+- Contribuir a los objetivos del equipo
+- Recibir la evaluación de los 90 días de período de prueba
+- Identificar áreas de crecimiento con apoyo del responsable
+
+SECCIÓN 4: MÓDULOS DE CAPACITACIÓN OBLIGATORIA
+
+Todos los nuevos empleados deben completar las siguientes capacitaciones dentro de sus primeros 30 días:
+1. Código de Conducta y Ética (2 horas)
+2. Concientización en Seguridad de la Información (3 horas)
+3. Privacidad de Datos y Fundamentos de GDPR (2 horas)
+4. Prevención del Acoso y Respeto en el Trabajo (1,5 horas)
+5. Salud y Seguridad Básica (1 hora)
+6. Fundamentos de Diversidad, Equidad e Inclusión (2 horas)
+
+El cumplimiento se registra automáticamente en el Sistema de Gestión del Aprendizaje (LMS). El incumplimiento en los primeros 30 días se escala al responsable del empleado y a RRHH.
+
+SECCIÓN 5: PROGRAMA DE BUDDY
+
+Cada nuevo empleado recibe un compañero (buddy) de su equipo durante los primeros 30 días. Las responsabilidades del buddy incluyen:
+- Reunirse con el nuevo empleado al menos 30 minutos durante la primera semana
+- Estar disponible para preguntas sobre cultura, herramientas y procesos
+- Presentar al nuevo empleado con otros colegas
+- Brindar orientación informal sobre normas del equipo y costumbres no escritas
+- Hacer seguimiento al menos una vez por semana durante el primer mes
+
+Los buddies son voluntarios y reciben reconocimiento en su evaluación de desempeño por su participación.
+
+SECCIÓN 6: PROCESO DE RENUNCIA
+
+Los empleados que deseen renunciar deben presentar una renuncia por escrito a su responsable y a RRHH. Los períodos de preaviso son:
+- Colaboradores individuales: mínimo 2 semanas
+- Responsables y personal senior: mínimo 4 semanas
+- Nivel Director en adelante: mínimo 6 semanas
+
+Los períodos de preaviso pueden reducirse por acuerdo mutuo entre el empleado y la empresa.
+
+SECCIÓN 7: LISTA DE VERIFICACIÓN DE DESVINCULACIÓN
+
+Ante una renuncia o desvinculación, RRHH inicia el proceso de offboarding:
+- Se agenda entrevista de salida con RRHH
+- El responsable es notificado para planificar la transferencia de conocimiento
+- Los accesos de IT son revocados el último día hábil
+- El equipamiento de la empresa es devuelto antes del pago del finiquito
+- Se procesa la baja de beneficios
+- El finiquito incluye el pago de los días de vacaciones acumulados
+- Se revisan con el empleado los acuerdos de confidencialidad y no captación
+- Se comunica la política de referencias laborales
+
+La documentación de transferencia de conocimiento debe completarse antes del último día hábil. Los responsables son responsables de asegurar la continuidad operativa.
+
+SECCIÓN 8: ENTREVISTA DE SALIDA
+
+Las entrevistas de salida son realizadas por RRHH con todos los empleados que se desvinculan. La entrevista abarca:
+- Motivos de la desvinculación
+- Retroalimentación sobre el liderazgo y la dinámica del equipo
+- Sugerencias para mejorar el ambiente laboral
+- Fortalezas y debilidades de la cultura de la empresa
+- Experiencia general en TechCorp
+
+Los datos de las entrevistas de salida se anonimizan y se comparten con la dirección de forma trimestral para identificar tendencias y áreas de mejora.
+
+SECCIÓN 9: POLÍTICA DE RECONTRATACIÓN
+
+Los ex empleados que se desvincularon en buenos términos (renuncia con preaviso correspondiente, historial de desempeño positivo, sin incumplimientos de políticas) son elegibles para ser recontratados luego de un mínimo de 6 meses. Los empleados recontratados pueden tener su antigüedad previa reconocida para el cálculo de beneficios, sujeto a aprobación de RRHH.
+
+Los empleados desvinculados por causa justificada no son elegibles para recontratación.
+
+SECCIÓN 10: TRANSFERENCIAS INTERNAS
+
+Los empleados que deseen transferirse a otro equipo o área deben:
+- Tener al menos 12 meses en su puesto actual
+- Consultar con su responsable actual antes de postularse
+- Postularse a través de la bolsa interna de empleos en el portal de RRHH
+- Completar el proceso de entrevistas estándar con el nuevo equipo
+
+Las transferencias aprobadas incluyen un período de transición de 4 a 6 semanas para garantizar la continuidad. La compensación se ajusta para alinearse con la banda del nuevo puesto.

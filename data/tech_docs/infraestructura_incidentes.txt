@@ -1,0 +1,165 @@
+POLÍTICA DE INFRAESTRUCTURA Y RESPUESTA A INCIDENTES
+Empresa: TechCorp SaaS
+Última actualización: enero de 2025
+
+SECCIÓN 1: DESCRIPCIÓN GENERAL DE LA INFRAESTRUCTURA
+
+La infraestructura de TechCorp está alojada principalmente en Amazon Web Services (AWS) con los siguientes componentes centrales:
+
+Entorno de Producción:
+- Región: us-east-1 (primaria), us-west-2 (recuperación ante desastres)
+- Cómputo: ECS Fargate para servicios contenedorizados, EC2 para cargas legadas
+- Base de datos: RDS PostgreSQL (Multi-AZ), ElastiCache Redis para caché
+- Almacenamiento: S3 para objetos, EFS para sistemas de archivos compartidos
+- CDN: CloudFront para activos estáticos y aceleración de API
+- Balanceo de carga: Application Load Balancer (ALB) con WAF habilitado
+
+Entorno de Staging:
+- Replica la arquitectura de producción a menor escala
+- Cuenta de AWS aislada para separación de entornos
+- Se despliega automáticamente con cada merge a la rama principal
+
+Entorno de Desarrollo:
+- Los desarrolladores usan configuraciones locales con Docker Compose
+- Base de datos de desarrollo compartida disponible para pruebas de integración
+- Las ramas de funcionalidad se despliegan automáticamente en entornos efímeros via GitHub Actions
+
+SECCIÓN 2: PROCESO DE DESPLIEGUE
+
+Todos los despliegues siguen un pipeline estructurado gestionado mediante GitHub Actions:
+
+Etapas del pipeline:
+1. El push de código activa el pipeline de CI (linting, pruebas unitarias, escaneo de seguridad)
+2. Se requiere revisión de pull request (mínimo 2 aprobaciones para servicios de producción)
+3. El merge a main activa el despliegue a staging
+4. Se ejecutan pruebas de integración y smoke tests contra staging
+5. El despliegue a producción requiere aprobación manual del tech lead
+6. Se usa estrategia de despliegue blue-green para releases sin tiempo de inactividad
+7. El rollback automático se activa si la tasa de errores supera el 1% dentro de los 10 minutos del despliegue
+
+Los hotfixes siguen un proceso abreviado pero igualmente requieren 1 aprobación y pruebas aprobadas.
+
+SECCIÓN 3: NIVELES DE SEVERIDAD DE INCIDENTES
+
+TechCorp clasifica los incidentes con el siguiente esquema:
+
+SEV-1 (Crítico):
+- Definición: interrupción total del servicio o brecha de datos que afecta a todos los usuarios
+- Tiempo de respuesta: inmediato (24/7)
+- Incident Commander: Ingeniero de guardia + Gerente de Ingeniería
+- Comunicación: actualización de la página de estado en 15 minutos, correo a clientes en 30 minutos
+- Post-mortem: requerido dentro de los 5 días hábiles
+
+SEV-2 (Alta):
+- Definición: funcionalidad principal no disponible o degradación significativa del rendimiento que afecta a más del 10% de los usuarios
+- Tiempo de respuesta: dentro de los 30 minutos
+- Incident Commander: Ingeniero de guardia
+- Comunicación: actualización de la página de estado en 30 minutos
+- Post-mortem: requerido dentro de los 10 días hábiles
+
+SEV-3 (Media):
+- Definición: funcionalidad menor degradada, solución alternativa disponible, afecta a menos del 10% de los usuarios
+- Tiempo de respuesta: dentro de las 2 horas (horario hábil)
+- Comunicación: notificación interna por Slack, actualización de página de estado si es visible para clientes
+- Post-mortem: recomendado
+
+SEV-4 (Baja):
+- Definición: problemas cosméticos, bugs menores sin impacto en usuarios
+- Tiempo de respuesta: próximo día hábil
+- Post-mortem: no requerido
+
+SECCIÓN 4: PROCEDIMIENTO DE RESPUESTA A INCIDENTES
+
+Cuando se detecta un incidente, se inicia el siguiente proceso:
+
+1. Detección: la alerta se activa via PagerDuty o se reporta en el canal de Slack #incidentes
+2. Triaje: el ingeniero de guardia evalúa la severidad dentro de los 15 minutos
+3. Declaración: se crea un canal de incidente en Slack (#inc-AAAA-MM-DD-descripcion)
+4. Convocatoria: se notifica a los miembros del equipo relevantes según la severidad
+5. Investigación: se identifica la causa raíz usando runbooks, logs y dashboards de monitoreo
+6. Mitigación: se aplica la corrección o solución alternativa para restaurar el servicio
+7. Resolución: se confirma la restauración del servicio y se monitorea durante 30 minutos
+8. Comunicación: se actualiza la página de estado y se notifica a los clientes afectados
+9. Post-mortem: se agenda y realiza un post-mortem sin culpas
+
+La guardia de turno se gestiona mediante PagerDuty. Todos los ingenieros participan en la rotación de guardia a partir de los 6 meses de antigüedad.
+
+SECCIÓN 5: MONITOREO Y OBSERVABILIDAD
+
+TechCorp utiliza el siguiente stack de observabilidad:
+
+Métricas: Datadog para métricas de infraestructura y aplicaciones
+Logs: Datadog Log Management, con retención de 30 días en producción
+Trazas: Datadog APM para trazado distribuido entre microservicios
+Monitoreo de disponibilidad: Datadog Synthetics para endpoints externos
+Seguimiento de errores: Sentry para errores de aplicación y reportes de caídas
+Dashboards: Grafana para métricas de negocio y operacionales
+Alertas: PagerDuty integrado con Datadog para alertas de guardia
+
+Métricas clave monitoreadas:
+- Tiempo de respuesta de la API (p50, p95, p99)
+- Tasa de errores por servicio
+- Utilización del pool de conexiones de la base de datos
+- Uso de memoria y CPU por contenedor
+- Tasa de éxito de despliegues
+
+SECCIÓN 6: GESTIÓN DE BASES DE DATOS
+
+El acceso a bases de datos está estrictamente controlado:
+- El acceso a la base de datos de producción requiere un ticket y aprobación del responsable
+- El acceso directo a producción está restringido a DBAs e ingenieros senior
+- Todo acceso a bases de datos se registra y audita
+- Las consultas a producción se realizan sobre réplicas de lectura cuando es posible
+- Las exportaciones de datos de producción requieren aprobación del VP y deben estar cifradas
+
+Copias de seguridad de bases de datos:
+- Snapshots automáticos diarios retenidos por 30 días
+- Recuperación a punto en el tiempo habilitada para los últimos 7 días
+- Restauración de backups probada trimestralmente
+
+SECCIÓN 7: RECUPERACIÓN ANTE DESASTRES
+
+TechCorp mantiene un Plan de Recuperación ante Desastres (DRP) con los siguientes objetivos:
+- Objetivo de Tiempo de Recuperación (RTO): 4 horas para eventos SEV-1
+- Objetivo de Punto de Recuperación (RPO): máximo 1 hora de pérdida de datos
+
+Procedimientos de recuperación ante desastres:
+1. Declarar el evento en el canal #incidentes
+2. El Gerente de Ingeniería notifica al VP de Ingeniería y al CTO
+3. Se inicia el failover a la región DR us-west-2
+4. Se realiza el cambio de DNS via Route 53
+5. Se verifica la integridad de los datos antes de reabrir el tráfico
+6. Se agenda una revisión post-incidente dentro de las 72 horas
+
+Se realizan simulacros completos de recuperación ante desastres dos veces al año. Los resultados se documentan y revisan con el equipo de liderazgo de ingeniería.
+
+SECCIÓN 8: PLANIFICACIÓN DE CAPACIDAD
+
+Las revisiones de capacidad se realizan trimestralmente:
+- Se revisa la utilización actual de recursos frente al pronóstico a 6 meses
+- Se revisan y ajustan las políticas de autoescalado
+- Se identifican oportunidades de optimización de costos
+- Se actualiza el roadmap de infraestructura para el siguiente trimestre
+
+Todos los cambios de provisión de infraestructura requieren un plan de Terraform revisado por al menos otro ingeniero. No se permiten cambios manuales en producción.
+
+SECCIÓN 9: PARCHEO DE SEGURIDAD Y GESTIÓN DE VULNERABILIDADES
+
+El equipo de seguridad gestiona la remediación de vulnerabilidades:
+- CVEs críticos: parcheados dentro de las 24 horas
+- CVEs altos: parcheados dentro de los 7 días
+- CVEs medios: parcheados dentro de los 30 días
+- CVEs bajos: atendidos en la próxima ventana de mantenimiento programada
+
+Las imágenes de contenedores se escanean en cada build usando Amazon ECR y Snyk. Las imágenes con vulnerabilidades críticas son bloqueadas antes del despliegue.
+
+SECCIÓN 10: GESTIÓN DE CAMBIOS
+
+Todos los cambios significativos de infraestructura siguen el proceso de Gestión de Cambios:
+1. Solicitud de Cambio enviada via Jira con evaluación de impacto
+2. Revisión por el Comité Asesor de Cambios (CAB) para cambios mayores
+3. Ventana de mantenimiento comunicada a los clientes con 72 horas de anticipación
+4. Plan de rollback documentado antes de la aprobación del cambio
+5. Validación post-cambio completada y documentada
+
+Los cambios de emergencia (necesarios para resolver incidentes activos) pueden omitir la revisión del CAB, pero deben documentarse dentro de las 24 horas de su implementación.

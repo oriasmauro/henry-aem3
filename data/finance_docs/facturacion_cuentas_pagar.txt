@@ -1,0 +1,130 @@
+POLÍTICA DE FACTURACIÓN Y CUENTAS A PAGAR
+Empresa: TechCorp SaaS
+Última actualización: enero de 2025
+
+SECCIÓN 1: DESCRIPCIÓN GENERAL DE FACTURACIÓN A CLIENTES
+
+TechCorp utiliza Stripe como plataforma principal de facturación para suscripciones SaaS. Los clientes enterprise con contratos personalizados se facturan a través de SAP Business One.
+
+Generación de facturas:
+- Suscripciones mensuales: facturas generadas automáticamente el día 1 de cada mes
+- Suscripciones anuales: facturas generadas 30 días antes de la fecha de renovación
+- Facturación por uso: facturas generadas dentro de los 3 días hábiles del cierre mensual
+- Facturación enterprise personalizada: según el calendario contractual
+
+Todas las facturas incluyen:
+- Razón social y domicilio fiscal de TechCorp
+- Domicilio de facturación del cliente
+- Número de factura único
+- Descripción detallada de los servicios
+- Impuestos aplicables
+- Condiciones y fecha de pago
+- Datos bancarios o link de pago
+
+SECCIÓN 2: CONDICIONES DE PAGO
+
+Condiciones de pago estándar por segmento de cliente:
+- Clientes self-serve (tarjeta de crédito): pago al momento de la facturación
+- Clientes PyME: condiciones de pago a 15 días
+- Clientes medianos: condiciones de pago a 30 días
+- Clientes enterprise: entre 30 y 60 días según contrato (las excepciones requieren aprobación del CFO)
+
+Política de pagos atrasados:
+- Recordatorios enviados a los 7, 14 y 21 días de vencimiento
+- Se aplica un interés del 1,5% mensual tras 30 días de mora (donde lo permite la ley)
+- Suspensión del servicio tras 60 días de mora
+- La cuenta pasa a gestión de cobros tras 90 días de mora
+
+Finanzas puede otorgar extensiones de pago de hasta 30 días para clientes con buen historial. Las extensiones superiores a 30 días requieren aprobación del VP de Finanzas.
+
+SECCIÓN 3: PROCESO DE CUENTAS A COBRAR
+
+El equipo de AR gestiona el ciclo completo de cobranzas:
+1. Factura generada y enviada al contacto de facturación del cliente
+2. Confirmación de pago registrada contra la factura en SAP
+3. Recordatorio enviado a los 7 días para facturas impagas
+4. El ejecutivo de cuenta es notificado a los 14 días de mora
+5. Finanzas contacta al cliente a los 21 días de mora
+6. Escalado al sponsor ejecutivo del cliente a los 30 días de mora
+7. Notificación formal de cobranza a los 60 días de mora
+8. Derivación a gestor de cobros o estudio jurídico a los 90 días de mora
+
+Las facturas en disputa deben escalarse a cuentasacobrar@techcorp.com con el número de factura y los detalles del reclamo. Finanzas investiga y responde dentro de los 5 días hábiles.
+
+SECCIÓN 4: POLÍTICA DE REEMBOLSOS
+
+Política de reembolsos de TechCorp por nivel de producto:
+- Planes mensuales: sin reembolso por el período de facturación en curso; la cancelación tiene efecto al final del período
+- Planes anuales: reembolso proporcional disponible dentro de los 30 días del pago si se solicita
+- Contratos enterprise: los reembolsos se rigen por las condiciones contractuales; generalmente no reembolsables salvo incumplimiento de ANS por parte de TechCorp
+- Interrupciones técnicas de más de 4 horas en un período de facturación: crédito de servicio del 10% del abono mensual aplicado automáticamente
+
+Las solicitudes de reembolso deben enviarse a facturacion@techcorp.com. Finanzas procesa los reembolsos aprobados dentro de los 10 días hábiles.
+
+SECCIÓN 5: PROCESO DE CUENTAS A PAGAR
+
+TechCorp procesa las facturas de proveedores a través del siguiente flujo:
+1. El proveedor envía la factura a cuentasapagar@techcorp.com o la sube al portal de proveedores
+2. El equipo de AP valida la factura contra la orden de compra o el contrato
+3. La factura se envía al responsable del presupuesto para aprobación en tres vías
+4. Las facturas aprobadas se procesan según las condiciones de pago
+5. El pago se libera via transferencia bancaria o tarjeta virtual
+6. Se envía aviso de remesa al proveedor en la fecha de pago
+
+Requisitos para facturas de proveedores:
+- Deben referenciar el número de orden de compra o de contrato
+- Deben incluir descripción detallada de los servicios
+- Deben especificar los datos de pago (cuenta bancaria o método de pago preferido)
+- Las facturas en moneda extranjera deben especificar la fecha del tipo de cambio aplicado
+
+SECCIÓN 6: ALTA DE PROVEEDORES PARA PAGO
+
+Los nuevos proveedores deben completar el proceso de alta antes de recibir pagos:
+1. Completar el Formulario de Alta de Proveedor (disponible en el portal de proveedores)
+2. Presentar constancia de CUIT e inscripción en AFIP
+3. Datos bancarios enviados via link seguro (nunca por correo electrónico)
+4. Presentar certificado de seguro si lo requiere el contrato
+5. Firmar el código de conducta para proveedores
+
+El alta de proveedores tarda entre 3 y 5 días hábiles. El alta urgente está disponible para proveedores críticos con aprobación del VP.
+
+SECCIÓN 7: PROCESO DE ÓRDENES DE COMPRA
+
+Todas las compras significativas requieren una Orden de Compra (OC) antes de comprometer el gasto:
+- Menos de $50.000 ARS: no se requiere OC, presentar via informe de gastos
+- Entre $50.000 y $500.000 ARS: se requiere OC con aprobación del responsable
+- Entre $500.000 y $2.000.000 ARS: se requiere OC con aprobación del director
+- Entre $2.000.000 y $5.000.000 ARS: se requiere OC con aprobación del VP
+- Más de $5.000.000 ARS: se requiere OC con aprobación del CFO
+
+Las OC se crean en SAP. Una vez emitida, los cambios requieren una enmienda a la OC siguiendo la misma cadena de aprobación. Los proveedores deben referenciar el número de OC en todas sus facturas.
+
+SECCIÓN 8: INFORMES FINANCIEROS
+
+Finanzas publica los siguientes informes:
+- Semanal: proyección de flujo de caja compartida con CFO y CEO
+- Mensual: Estado de Resultados, Balance y Flujo de Caja al equipo de liderazgo
+- Trimestral: paquete financiero para el Directorio incluyendo análisis de desvíos
+- Anual: estados financieros auditados
+
+Los jefes de área reciben informes mensuales de presupuesto vs. real antes del día 10 de cada mes. Las consultas deben dirigirse a su Business Partner de Finanzas.
+
+SECCIÓN 9: CUMPLIMIENTO IMPOSITIVO
+
+TechCorp recauda y remite impuestos en las jurisdicciones donde opera. El equipo de Finanzas gestiona:
+- IVA: facturado y remitido mensualmente a AFIP
+- Ingresos Brutos: determinados y pagados por jurisdicción según el Convenio Multilateral
+- Impuesto a las Ganancias: liquidación anual con anticipos mensuales
+- Retenciones: practicadas sobre proveedores según normativa vigente de AFIP
+
+Los clientes que soliciten exenciones impositivas deben presentar la documentación correspondiente a facturacion@techcorp.com. Las exenciones se aplican de forma prospectiva.
+
+SECCIÓN 10: ACCESO A SISTEMAS FINANCIEROS
+
+El acceso a los sistemas financieros (SAP, Stripe, Expensify) es por roles:
+- Equipo de Finanzas: acceso completo
+- Responsables de presupuesto: acceso de lectura a los informes de su área
+- Presentadores de gastos: solo acceso a Expensify
+- Consultas de facturación/AR: solo el equipo de Finanzas orientado al cliente
+
+Las solicitudes de acceso a sistemas financieros deben enviarse via Mesa de Ayuda de IT y requieren aprobación del Director de Finanzas. El acceso se revisa trimestralmente y se revoca de inmediato ante una desvinculación.

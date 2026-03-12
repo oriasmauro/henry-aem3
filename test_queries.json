@@ -1,0 +1,88 @@
+{
+  "test_queries": [
+    {
+      "id": 1,
+      "query": "¿Cuántos días de vacaciones me corresponden después de 3 años en la empresa?",
+      "expected_agent": "hr",
+      "category": "vacaciones_licencias",
+      "notes": "Intención clara de RRHH, debe enrutar al hr_agent"
+    },
+    {
+      "id": 2,
+      "query": "La pantalla de mi laptop se rompió, ¿cómo solicito un reemplazo?",
+      "expected_agent": "tech",
+      "category": "soporte_hardware",
+      "notes": "Intención clara de IT, debe enrutar al tech_agent"
+    },
+    {
+      "id": 3,
+      "query": "Necesito presentar un informe de gastos por una cena con un cliente la semana pasada. ¿Cuál es el proceso?",
+      "expected_agent": "finance",
+      "category": "reembolso_gastos",
+      "notes": "Intención clara de Finanzas, debe enrutar al finance_agent"
+    },
+    {
+      "id": 4,
+      "query": "Necesitamos firmar un NDA con un nuevo proveedor. ¿Cuál es el proceso?",
+      "expected_agent": "legal",
+      "category": "contratos_nda",
+      "notes": "Intención clara de Legal, debe enrutar al legal_agent"
+    },
+    {
+      "id": 5,
+      "query": "Llevo 2 años en la empresa y obtuve una calificación de 4. ¿Qué aumento salarial puedo esperar?",
+      "expected_agent": "hr",
+      "category": "desempeno_compensacion",
+      "notes": "Pregunta de RRHH sobre desempeño y compensación"
+    },
+    {
+      "id": 6,
+      "query": "Nuestro servicio de producción está caído y afecta a todos los clientes. ¿Qué hago?",
+      "expected_agent": "tech",
+      "category": "respuesta_incidentes",
+      "notes": "Respuesta a incidente de IT, escenario SEV-1"
+    },
+    {
+      "id": 7,
+      "query": "Un cliente lleva 45 días sin pagar su factura. ¿Cuáles son los próximos pasos?",
+      "expected_agent": "finance",
+      "category": "cuentas_cobrar",
+      "notes": "Pregunta de Finanzas sobre cobranzas"
+    },
+    {
+      "id": 8,
+      "query": "Un empleado recibió una intimación judicial relacionada con un asunto de la empresa. ¿Qué debemos hacer?",
+      "expected_agent": "legal",
+      "category": "litigios",
+      "notes": "Escalado legal por litigio"
+    },
+    {
+      "id": 9,
+      "query": "¿Cómo configuro la VPN en mi nueva MacBook?",
+      "expected_agent": "tech",
+      "category": "vpn_acceso",
+      "notes": "Soporte IT - configuración de VPN"
+    },
+    {
+      "id": 10,
+      "query": "Quiero transferirme a otro equipo. ¿Cuál es el proceso?",
+      "expected_agent": "hr",
+      "category": "transferencia_interna",
+      "notes": "Pregunta de RRHH sobre movilidad interna"
+    },
+    {
+      "id": 11,
+      "query": "Queremos usar una librería con licencia GPL en nuestro producto. ¿Está permitido?",
+      "expected_agent": "legal",
+      "category": "propiedad_intelectual",
+      "notes": "Caso borde: parece técnico pero es Legal/PI"
+    },
+    {
+      "id": 12,
+      "query": "¿Cuál es el proceso de aprobación para comprar una nueva herramienta de software para mi equipo?",
+      "expected_agent": "tech",
+      "category": "adquisicion_software",
+      "notes": "Caso borde: parece Finanzas pero es adquisición de IT"
+    }
+  ]
+}

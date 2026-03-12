@@ -1,0 +1,34 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Variables de entorno (NUNCA commitear)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# FAISS índices persistidos en disco
+faiss_index/
+*.faiss
+*.pkl
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Logs
+*.log

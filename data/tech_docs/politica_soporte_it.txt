@@ -1,0 +1,158 @@
+POLÍTICA DE SOPORTE DE IT Y ACCESO A SOFTWARE
+Empresa: TechCorp SaaS
+Última actualización: enero de 2025
+
+SECCIÓN 1: CANALES DE SOPORTE DE IT
+
+El soporte de IT de TechCorp está disponible a través de los siguientes canales:
+- Portal de Mesa de Ayuda: mesadeayuda.techcorp.interno (canal principal para todas las solicitudes)
+- Correo electrónico: soporteit@techcorp.com (para problemas no urgentes)
+- Slack: canal #soporte-it (para consultas rápidas)
+- Teléfono: interno 1000 (solo para urgencias, disponible de 8:00 a 18:00 hs)
+- Soporte presencial: oficina de IT en el Piso 2, Edificio A (con turno previo)
+
+Todas las solicitudes deben registrarse en el Portal de Mesa de Ayuda para garantizar el seguimiento y el cumplimiento de los ANS. El soporte por teléfono y Slack derivará al usuario a crear un ticket en el portal.
+
+SECCIÓN 2: ACUERDOS DE NIVEL DE SERVICIO (ANS)
+
+El Soporte de IT opera bajo los siguientes niveles de ANS:
+
+Prioridad 1 - Crítico (sistema caído, brecha de seguridad):
+- Tiempo de respuesta: 15 minutos
+- Objetivo de resolución: 4 horas
+- Escalado: se notifica al Gerente de IT de inmediato
+
+Prioridad 2 - Alta (funcionalidad principal deteriorada):
+- Tiempo de respuesta: 1 hora
+- Objetivo de resolución: 8 horas
+- Escalado: si no hay resolución en 4 horas
+
+Prioridad 3 - Media (funcionalidad degradada con solución alternativa disponible):
+- Tiempo de respuesta: 4 horas
+- Objetivo de resolución: 2 días hábiles
+- Escalado: si no hay resolución en 1 día hábil
+
+Prioridad 4 - Baja (problemas menores, consultas de uso):
+- Tiempo de respuesta: 8 horas
+- Objetivo de resolución: 5 días hábiles
+
+SECCIÓN 3: PROVISIÓN DE SOFTWARE
+
+Todo el software utilizado en TechCorp debe estar aprobado y provisto por IT. El catálogo de software aprobado se mantiene en software.techcorp.interno.
+
+Software estándar provisto a todos los empleados:
+- Microsoft 365 (Word, Excel, PowerPoint, Outlook, Teams)
+- Slack (Business+)
+- Zoom (Pro)
+- 1Password (acceso a la bóveda corporativa)
+- Okta (SSO y MFA)
+- Jira y Confluence (Atlassian)
+- GitHub (acceso a la organización corporativa)
+
+Para solicitar software adicional:
+1. Verificar primero en el catálogo de software aprobado
+2. Si no está listado, enviar una Solicitud de Software por el Portal de Mesa de Ayuda
+3. Las solicitudes requieren aprobación del responsable y revisión de seguridad
+4. La revisión de seguridad para nuevos proveedores toma entre 5 y 10 días hábiles
+5. Una vez aprobado, IT provisiona la licencia dentro de los 2 días hábiles
+
+SECCIÓN 4: PROVISIÓN DE HARDWARE
+
+Los nuevos empleados reciben hardware estándar según su rol:
+
+Paquete estándar (todos los empleados):
+- MacBook Pro 14" M3 o laptop Windows equivalente
+- Hub USB-C
+- Teclado y mouse con cable
+- Monitor (para empleados en oficina)
+
+Paquete para desarrolladores (ingenieros, equipo de datos):
+- MacBook Pro 16" M3 Max o equivalente
+- Monitor 4K de 32"
+- Periféricos adicionales según necesidad
+
+Paquete para gerentes y directores:
+- MacBook Pro 14" M3 o equivalente
+- Monitor de 27"
+- Estación de acoplamiento (docking station)
+
+El ciclo de renovación de hardware es cada 3 años. Las solicitudes de renovación anticipada requieren aprobación del responsable e IT, con justificación documentada.
+
+SECCIÓN 5: VPN Y ACCESO REMOTO
+
+Todos los empleados que trabajen de forma remota deben usar la VPN corporativa (Cisco AnyConnect) para acceder a los recursos internos. Las credenciales de VPN se provisionan durante la incorporación.
+
+Pautas de uso de VPN:
+- Conectarse siempre a la VPN al acceder a sistemas internos fuera de la oficina
+- No usar redes Wi-Fi públicas sin VPN activa
+- Las sesiones de VPN se desconectan automáticamente tras 8 horas de inactividad
+- Reportar cualquier problema de conexión a Soporte de IT de inmediato
+
+El split tunneling está deshabilitado. Todo el tráfico se enruta por la VPN cuando está conectada. Las excepciones requieren aprobación del CISO.
+
+SECCIÓN 6: POLÍTICA DE CONTRASEÑAS Y AUTENTICACIÓN
+
+TechCorp aplica los siguientes requisitos de contraseñas y autenticación:
+
+Requisitos de contraseña:
+- Mínimo 14 caracteres
+- Debe incluir mayúsculas, minúsculas, números y caracteres especiales
+- No debe contener el nombre ni el usuario del empleado
+- No se pueden reutilizar las últimas 12 contraseñas
+- Vence cada 90 días
+
+Autenticación de múltiples factores (MFA):
+- La MFA es obligatoria para todos los sistemas corporativos
+- Métodos aprobados: aplicación Okta Verify, llave de seguridad física (YubiKey)
+- La MFA por SMS no está permitida
+- Los dispositivos de MFA deben registrarse en el portal de IT
+
+Todos los empleados deben usar 1Password para la gestión de contraseñas. Está prohibido almacenar contraseñas en navegadores o archivos de texto plano.
+
+SECCIÓN 7: REQUISITOS DE SEGURIDAD PARA LAPTOPS
+
+Todas las laptops corporativas deben cumplir los siguientes requisitos de seguridad:
+- Cifrado completo del disco habilitado (FileVault en Mac, BitLocker en Windows)
+- Actualizaciones automáticas del sistema operativo habilitadas
+- Bloqueo de pantalla activado tras 5 minutos de inactividad
+- Software EDR (Detección y Respuesta en Endpoints) aprobado instalado
+- Acceso de administrador local restringido (requiere aprobación de IT)
+
+Los empleados no deben instalar software no autorizado, deshabilitar herramientas de seguridad ni compartir su dispositivo con personas externas a la empresa. El incumplimiento puede derivar en acciones disciplinarias.
+
+SECCIÓN 8: DISPOSITIVOS PERDIDOS O ROBADOS
+
+Si un dispositivo corporativo se pierde o es robado:
+1. Reportar de inmediato a Soporte de IT (ticket Prioridad 1)
+2. Notificar al responsable y a RRHH
+3. Realizar una denuncia policial si se sospecha robo
+4. IT procederá al borrado remoto del dispositivo dentro de las 2 horas de la notificación
+5. Se entregará un dispositivo de reemplazo dentro de las 24 horas
+
+Los empleados son responsables de mantener los dispositivos físicamente seguros. Dejar dispositivos desatendidos en lugares públicos constituye una violación de política.
+
+SECCIÓN 9: ACTUALIZACIONES DE SOFTWARE Y PARCHES
+
+IT gestiona las actualizaciones de software y parches de seguridad mediante una plataforma de gestión centralizada. Política de actualizaciones:
+- Parches de seguridad críticos: desplegados dentro de las 24 horas de su publicación
+- Actualizaciones mayores del sistema operativo: probadas y desplegadas dentro de los 30 días de su publicación
+- Actualizaciones de aplicaciones: desplegadas de forma gradual, generalmente dentro de 2 semanas
+
+Los empleados no deben posponer ni ignorar las notificaciones de actualización. Si una actualización genera problemas, reportar a Soporte de IT de inmediato en lugar de revertir la actualización.
+
+SECCIÓN 10: USO ACEPTABLE DE LOS RECURSOS DE IT
+
+Los recursos de IT corporativos (dispositivos, red, software) se proveen para fines laborales. Se permite un uso personal limitado siempre que no:
+- Viole leyes ni políticas de la empresa
+- Consuma ancho de banda o almacenamiento excesivos
+- Introduzca riesgos de seguridad
+- Interfiera con las responsabilidades laborales
+
+Usos prohibidos:
+- Acceder o distribuir contenido ilegal
+- Minería de criptomonedas
+- Instalar software no autorizado
+- Compartir credenciales corporativas con terceros
+- Eludir controles de seguridad (VPN, MFA, firewall)
+
+Los sistemas de IT son monitoreados con fines de seguridad y cumplimiento. Los empleados no tienen expectativa de privacidad en dispositivos ni redes corporativas.
