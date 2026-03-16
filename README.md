@@ -68,11 +68,11 @@ result = system.process("¿Y si soy part-time?", user_id="usuario-123")  # mismo
 result = system.process("¿Cómo configuro la VPN?")
 ```
 
-Para persistencia real en producción, reemplazar `MemorySaver` por `PostgresSaver` en `src/graph.py`.
+Para persistencia real en producción, es conveniente remplazar `MemorySaver` por `PostgresSaver` en `src/graph.py`.
 
 ## Evaluación con golden dataset
 
-El proyecto incluye un evaluador sistemático contra un dataset dorado de 12 casos curados:
+El proyecto incluye un evaluador sistemático contra un dataset dorado de 12 casos:
 
 ```bash
 # Evaluación completa (con scoring LLM)
@@ -340,16 +340,13 @@ Trace: https://cloud.langfuse.com/trace/<trace_id>
 ## Decisiones técnicas
 
 **¿Por qué LangGraph en lugar de orquestación imperativa?**
-La versión anterior usaba `if/elif` en `process()` para rutear entre agentes. Con LangGraph, el routing es declarativo (`add_conditional_edges`), el estado es tipado (`AgentState`) y el grafo es inspeccionable. Agregar un nuevo dominio requiere solo un `add_node` + un edge condicional, sin modificar la lógica existente.
+Con LangGraph, el routing es declarativo (`add_conditional_edges`), el estado es tipado (`AgentState`) y el grafo es inspeccionable. Agregar un nuevo dominio requiere solo un `add_node` + un edge condicional, sin modificar la lógica existente.
 
 **¿Por qué no es A2A (Agent-to-Agent)?**
-Este sistema usa orquestación hub-and-spoke: un orquestador central rutea a agentes especializados dentro del mismo proceso. El protocolo A2A de Google implica agentes independientes que exponen HTTP endpoints con Agent Cards y se comunican como peers entre distintos servicios. Esta arquitectura es correcta para un único servicio corporativo; A2A agregaría overhead innecesario sin beneficio real.
+Este sistema usa orquestación: un orquestador central rutea a agentes especializados dentro del mismo proceso. El protocolo A2A de Google implica agentes independientes que exponen HTTP endpoints con Agent Cards y se comunican como peers entre distintos servicios. Esta arquitectura es correcta para un único servicio corporativo; A2A agregaría overhead innecesario sin beneficio real.
 
 **¿Por qué un vector store por dominio?**
 Índices separados por dominio evitan recuperaciones cruzadas. Si el HR agent consultara un índice unificado, podría traer chunks de IT o Legal como contexto, degradando la precisión de las respuestas.
-
-**¿Por qué separar retrieval de generación en el pipeline RAG?**
-La versión original tenía el retriever dentro del LCEL chain, lo que causaba que `run()` lo invocara dos veces (una explícita para obtener fuentes, otra implícita dentro del chain). El pipeline actual separa las dos etapas: una sola llamada al retriever, luego generación con el contexto ya formateado. Esto reduce llamadas a la API de embeddings a la mitad.
 
 **¿Por qué LCEL en lugar de AgentExecutor?**
 El flujo RAG es determinístico (retrieve → generate), no iterativo. LCEL es más predecible, más barato en tokens y más fácil de trazar en Langfuse que un AgentExecutor con herramientas.
@@ -365,9 +362,6 @@ Equilibrio costo/calidad adecuado para este caso. En producción, el Orchestrato
 
 **¿Por qué el evaluador recibe el contexto recuperado?**
 Sin los documentos recuperados en el prompt del evaluador, la dimensión `accuracy` solo puede juzgar si la respuesta "suena" correcta, no si está fundamentada en los datos reales. Pasar el contexto hace que la evaluación sea genuinamente verificable.
-
-**¿Por qué logging estructurado en lugar de print()?**
-Con `logging` se puede subir el nivel a `WARNING` en producción para silenciar el ruido operativo, o bajar a `DEBUG` con `--debug` para diagnóstico. Con `print()` es todo o nada.
 
 ## CI/CD
 
@@ -389,22 +383,12 @@ El pipeline de GitHub Actions (`.github/workflows/ci.yaml`) corre en cada push a
 
 ## Próximos pasos
 
-### Alta prioridad
-
 - **Sesiones de usuario con memoria real**: implementar una capa de `session_id` estable que se pase como `user_id` para que `MemorySaver` persista el contexto entre múltiples mensajes del mismo usuario. Para producción, migrar a `PostgresSaver`.
 - **Manejo de errores en golden_evaluator.py**: envolver cada caso en `try/except` para que errores puntuales (timeout de API, red) no interrumpan toda la evaluación y se guarden resultados parciales.
 - **Timeout en `graph.invoke()`**: agregar límite de tiempo para evitar esperas indefinidas ante fallos de la API de OpenAI.
-
-### Media prioridad
-
 - **Validación de input**: rechazar queries vacíos o excesivamente largos antes de invocar el grafo.
 - **Retry con backoff exponencial**: manejar errores 429 (rate limit) de OpenAI sin crashear.
 - **Tests de integración**: agregar tests con `@pytest.mark.integration` que validen el flujo end-to-end con datos reales (marcados para no correr en CI).
-- **Aislación de tests del grafo**: usar un `thread_id` único por test en lugar del `"test-thread"` compartido para evitar dependencias entre tests.
-
-### Baja prioridad
-
 - **Modelo diferenciado por dominio**: usar `gpt-4o` para agentes de Legal y Finance donde la precisión es más crítica.
 - **Caché de queries frecuentes**: reducir costo y latencia para consultas duplicadas o muy similares.
 - **Métricas de routing en Langfuse**: registrar accuracy de routing y latencia por dominio para detectar degradación sistemática.
-- **Edge cases en golden dataset**: agregar casos ambiguos, fuera de dominio y queries que crucen múltiples dominios.
