@@ -90,43 +90,49 @@ def evaluate_case(
 
     # Similitud semántica entre respuesta generada y esperada
     emb_generated = get_embedding(openai_client, result["answer"])
-    emb_expected  = get_embedding(openai_client, case["expected_answer"])
+    emb_expected = get_embedding(openai_client, case["expected_answer"])
     similarity = round(cosine_similarity(emb_generated, emb_expected), 4)
     answer_pass = similarity >= SIMILARITY_THRESHOLD
 
     icon_routing = "✅" if routing_correct else "❌"
-    icon_answer  = "✅" if answer_pass else "❌"
+    icon_answer = "✅" if answer_pass else "❌"
 
     print(f"    Routing: {icon_routing} ({result['domain']} | esperado: {case['expected_agent']})")
-    print(f"    Similitud semántica: {icon_answer} {similarity:.3f} (umbral: {SIMILARITY_THRESHOLD})")
+    print(
+        f"    Similitud semántica: {icon_answer} {similarity:.3f} (umbral: {SIMILARITY_THRESHOLD})"
+    )
     print(f"    Latencia: {latency}s")
 
     return {
         **case,
-        "generated_answer":   result["answer"],
-        "routed_agent":        result["domain"],
-        "routing_correct":     routing_correct,
+        "generated_answer": result["answer"],
+        "routed_agent": result["domain"],
+        "routing_correct": routing_correct,
         "semantic_similarity": similarity,
-        "answer_pass":         answer_pass,
-        "trace_id":            result["trace_id"],
-        "latency_seconds":     latency,
-        "llm_eval_overall":    result.get("evaluation", {}).get("overall") if result.get("evaluation") else None,
+        "answer_pass": answer_pass,
+        "trace_id": result["trace_id"],
+        "latency_seconds": latency,
+        "llm_eval_overall": result.get("evaluation", {}).get("overall")
+        if result.get("evaluation")
+        else None,
     }
 
 
 def print_report(results: list[dict]) -> None:
     """Imprime el reporte final de la evaluación."""
     total = len(results)
-    routing_ok    = sum(1 for r in results if r["routing_correct"])
-    answer_ok     = sum(1 for r in results if r["answer_pass"])
+    routing_ok = sum(1 for r in results if r["routing_correct"])
+    answer_ok = sum(1 for r in results if r["answer_pass"])
     avg_similarity = sum(r["semantic_similarity"] for r in results) / total
-    avg_latency    = sum(r["latency_seconds"] for r in results) / total
+    avg_latency = sum(r["latency_seconds"] for r in results) / total
 
     print("\n" + "=" * 65)
     print("REPORTE GOLDEN DATASET EVALUATION")
     print("=" * 65)
 
-    print(f"\n{'#':<4} {'Agente Esp.':<14} {'Agente Obtenido':<16} {'Routing':<10} {'Similitud':<12} {'Pass'}")
+    print(
+        f"\n{'#':<4} {'Agente Esp.':<14} {'Agente Obtenido':<16} {'Routing':<10} {'Similitud':<12} {'Pass'}"
+    )
     print("-" * 65)
 
     for r in results:
@@ -143,8 +149,8 @@ def print_report(results: list[dict]) -> None:
 
     print("-" * 65)
     print("\n📊 MÉTRICAS GLOBALES")
-    print(f"   Routing accuracy:      {routing_ok}/{total} ({routing_ok/total*100:.1f}%)")
-    print(f"   Answer pass rate:      {answer_ok}/{total} ({answer_ok/total*100:.1f}%)")
+    print(f"   Routing accuracy:      {routing_ok}/{total} ({routing_ok / total * 100:.1f}%)")
+    print(f"   Answer pass rate:      {answer_ok}/{total} ({answer_ok / total * 100:.1f}%)")
     print(f"   Similitud promedio:    {avg_similarity:.3f}")
     print(f"   Latencia promedio:     {avg_latency:.2f}s")
 
@@ -161,7 +167,9 @@ def print_report(results: list[dict]) -> None:
     if failed_answers:
         print(f"\n⚠️  RESPUESTAS BAJO UMBRAL ({len(failed_answers)} casos):")
         for r in failed_answers:
-            print(f"   Caso {r['id']}: similitud={r['semantic_similarity']:.3f} | {r['query'][:60]}...")
+            print(
+                f"   Caso {r['id']}: similitud={r['semantic_similarity']:.3f} | {r['query'][:60]}..."
+            )
 
     print("\n" + "=" * 65)
 
