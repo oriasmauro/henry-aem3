@@ -27,23 +27,28 @@ jobs:
         with:
           version: "0.9.29"
           enable-cache: true
-          cache-dependency-glob: |
-            uv.lock
-            pyproject.toml
+          cache-dependency-glob: "requirements*.txt"
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version-file: ".python-version"
 
-      - name: Install dependencies (locked)
-        run: uv sync --dev --locked
+      - name: Install dependencies
+        run: |
+          uv pip install --system -r requirements.txt
+          uv pip install --system -r requirements-dev.txt
 
       - name: Ruff (lint)
-        run: uv run ruff check .
+        run: ruff check .
 
       - name: Ruff (format check)
-        run: uv run ruff format --check .
+        run: ruff format --check .
 
       - name: Pytest
-        run: uv run pytest -q
+        env:
+          OPENAI_API_KEY: "test-openai-key"
+          LANGFUSE_PUBLIC_KEY: "pk-lf-test"
+          LANGFUSE_SECRET_KEY: "sk-lf-test"
+          LANGFUSE_HOST: "https://cloud.langfuse.com"
+        run: pytest -q --cov=src --cov-report=term-missing --cov-fail-under=80

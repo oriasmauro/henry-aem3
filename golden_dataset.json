@@ -1,0 +1,88 @@
+{
+  "golden_dataset": [
+    {
+      "id": 1,
+      "query": "¿Cuántos días de vacaciones me corresponden después de 3 años en la empresa?",
+      "expected_agent": "hr",
+      "expected_answer": "Después de 3 años de antigüedad corresponden 25 días de vacaciones anuales, según la Sección 1 de la política de vacaciones de TechCorp.",
+      "category": "vacaciones_licencias"
+    },
+    {
+      "id": 2,
+      "query": "La pantalla de mi laptop se rompió, ¿cómo solicito un reemplazo?",
+      "expected_agent": "tech",
+      "expected_answer": "Debés crear un ticket de Prioridad 1 en el Portal de Mesa de Ayuda (mesadeayuda.techcorp.interno). IT entregará un dispositivo de reemplazo dentro de las 24 horas de la notificación.",
+      "category": "soporte_hardware"
+    },
+    {
+      "id": 3,
+      "query": "Necesito presentar un informe de gastos por una cena con un cliente la semana pasada. ¿Cuál es el proceso?",
+      "expected_agent": "finance",
+      "expected_answer": "Debés ingresar a Expensify en expensify.techcorp.interno, crear un informe de gastos, adjuntar el comprobante original, seleccionar la categoría correcta, listar a todos los asistentes con su empresa y rol, y enviarlo al responsable para aprobación. El límite para cenas con clientes es de $15.000 ARS por persona; montos superiores requieren aprobación del VP.",
+      "category": "reembolso_gastos"
+    },
+    {
+      "id": 4,
+      "query": "Necesitamos firmar un NDA con un nuevo proveedor. ¿Cuál es el proceso?",
+      "expected_agent": "legal",
+      "expected_answer": "Debés enviar una Solicitud Legal a través del portal legal.techcorp.interno adjuntando el contrato y los datos de la contraparte. Legal revisa en 5 días hábiles usando la plantilla de NDA mutuo estándar (vigencia de 3 años). Ningún empleado puede firmar sin autorización del CEO o CFO.",
+      "category": "contratos_nda"
+    },
+    {
+      "id": 5,
+      "query": "Llevo 2 años en la empresa y obtuve una calificación de 4. ¿Qué aumento salarial puedo esperar?",
+      "expected_agent": "hr",
+      "expected_answer": "Con una calificación de 4 (Supera las expectativas) y 2 años de antigüedad, el incremento por mérito es del 4% al 7% sobre el salario base. El aumento se comunica dentro de los 30 días posteriores a la evaluación anual de diciembre, sujeto a disponibilidad presupuestaria.",
+      "category": "desempeno_compensacion"
+    },
+    {
+      "id": 6,
+      "query": "Nuestro servicio de producción está caído y afecta a todos los clientes. ¿Qué hago?",
+      "expected_agent": "tech",
+      "expected_answer": "Es un incidente SEV-1. Debés reportarlo inmediatamente en el canal #incidentes de Slack o via PagerDuty. Se crea un canal de incidente, se notifica al Ingeniero de guardia y al Gerente de Ingeniería. La página de estado debe actualizarse en 15 minutos y se debe enviar un correo a los clientes en 30 minutos.",
+      "category": "respuesta_incidentes"
+    },
+    {
+      "id": 7,
+      "query": "Un cliente lleva 45 días sin pagar su factura. ¿Cuáles son los próximos pasos?",
+      "expected_agent": "finance",
+      "expected_answer": "A los 45 días de mora, Finanzas debe haber escalado al sponsor ejecutivo del cliente (el escalado al ejecutivo ocurre a los 30 días). El siguiente paso es emitir una notificación formal de cobranza a los 60 días. Si no se regulariza, a los 90 días la cuenta pasa a gestión de cobros o estudio jurídico.",
+      "category": "cuentas_cobrar"
+    },
+    {
+      "id": 8,
+      "query": "Un empleado recibió una intimación judicial relacionada con un asunto de la empresa. ¿Qué debemos hacer?",
+      "expected_agent": "legal",
+      "expected_answer": "Se debe notificar a Legal dentro de las 24 horas, preservar de inmediato todos los documentos potencialmente relevantes (medida cautelar de preservación), y no responder ni negociar con la contraparte sin la presencia de Legal.",
+      "category": "litigios"
+    },
+    {
+      "id": 9,
+      "query": "¿Cómo configuro la VPN en mi nueva MacBook?",
+      "expected_agent": "tech",
+      "expected_answer": "La VPN corporativa es Cisco AnyConnect. Las credenciales se provisionan durante el onboarding. Debés conectarte siempre que accedas a sistemas internos fuera de la oficina. Para problemas de configuración, creá un ticket en el Portal de Mesa de Ayuda.",
+      "category": "vpn_acceso"
+    },
+    {
+      "id": 10,
+      "query": "Quiero transferirme a otro equipo. ¿Cuál es el proceso?",
+      "expected_agent": "hr",
+      "expected_answer": "Para solicitar una transferencia interna debés tener al menos 12 meses en tu puesto actual, consultarlo con tu responsable actual, postularte a través de la bolsa interna en el portal de RRHH y completar el proceso de entrevistas con el nuevo equipo. Las transferencias aprobadas incluyen un período de transición de 4 a 6 semanas.",
+      "category": "transferencia_interna"
+    },
+    {
+      "id": 11,
+      "query": "Queremos usar una librería con licencia GPL en nuestro producto. ¿Está permitido?",
+      "expected_agent": "legal",
+      "expected_answer": "No, el código bajo licencia GPL no puede incorporarse a productos propietarios de TechCorp sin aprobación previa de Legal. Las licencias pre-aprobadas son MIT, Apache 2.0 y BSD. Para usar GPL, debés iniciar una solicitud en el portal Legal para revisión.",
+      "category": "propiedad_intelectual"
+    },
+    {
+      "id": 12,
+      "query": "¿Cuál es el proceso de aprobación para comprar una nueva herramienta de software para mi equipo?",
+      "expected_agent": "tech",
+      "expected_answer": "Primero verificá si la herramienta está en el catálogo de software aprobado en software.techcorp.interno. Si no está listada, enviá una Solicitud de Software por el Portal de Mesa de Ayuda. La solicitud requiere aprobación del responsable y revisión de seguridad de IT (5 a 10 días hábiles). Una vez aprobada, IT provisiona la licencia en 2 días hábiles.",
+      "category": "adquisicion_software"
+    }
+  ]
+}

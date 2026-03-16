@@ -148,7 +148,11 @@ class MultiAgentSystem:
 
         try:
             logger.info("[1/3] Ejecutando grafo LangGraph...")
-            final_state = self.graph.invoke(initial_state)
+            thread_id = user_id or trace_id
+            final_state = self.graph.invoke(
+                initial_state,
+                config={"configurable": {"thread_id": thread_id}},
+            )
 
             # Registrar spans en Langfuse con los datos del estado final
             trace.span(

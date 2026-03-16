@@ -19,6 +19,7 @@ Beneficios respecto a la orquestación imperativa anterior:
 import logging
 from typing import Optional
 
+from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from typing_extensions import TypedDict
 
@@ -162,4 +163,4 @@ def build_graph(orchestrator, agents: dict, evaluator):
 
     builder.add_edge("evaluate", END)
 
-    return builder.compile()
+    return builder.compile(checkpointer=MemorySaver())
