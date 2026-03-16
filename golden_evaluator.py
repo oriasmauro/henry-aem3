@@ -28,9 +28,8 @@ from pathlib import Path
 import numpy as np
 from openai import OpenAI
 
-from src.multi_agent_system import MultiAgentSystem
 from src.config import CONFIG
-
+from src.multi_agent_system import MultiAgentSystem
 
 # Umbral de similitud coseno para considerar una respuesta como correcta
 SIMILARITY_THRESHOLD = 0.80
@@ -57,7 +56,7 @@ def load_golden_dataset(path: str = "golden_dataset.json") -> list[dict]:
     file = Path(path)
     if not file.exists():
         raise FileNotFoundError(f"No se encontró el golden dataset en: {path}")
-    with open(file, "r", encoding="utf-8") as f:
+    with open(file, encoding="utf-8") as f:
         data = json.load(f)
     return data["golden_dataset"]
 
@@ -143,7 +142,7 @@ def print_report(results: list[dict]) -> None:
         )
 
     print("-" * 65)
-    print(f"\n📊 MÉTRICAS GLOBALES")
+    print("\n📊 MÉTRICAS GLOBALES")
     print(f"   Routing accuracy:      {routing_ok}/{total} ({routing_ok/total*100:.1f}%)")
     print(f"   Answer pass rate:      {answer_ok}/{total} ({answer_ok/total*100:.1f}%)")
     print(f"   Similitud promedio:    {avg_similarity:.3f}")
