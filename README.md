@@ -55,15 +55,40 @@ class AgentState(TypedDict):
     evaluation: Optional[dict]  # set por evaluate_node
 ```
 
-### Ventajas respecto a la orquestación imperativa
+### Checkpointing con MemorySaver
 
-| Antes (if/elif directo) | Ahora (LangGraph StateGraph) |
-|---|---|
-| Routing enterrado en bloques `if/elif` | Routing declarativo con `add_conditional_edges` |
-| Estado implícito (variables locales) | Estado explícito y tipado (`AgentState`) |
-| Extensión requiere modificar `process()` | Extensión = nuevo nodo + nuevo edge |
-| Sin soporte para checkpointing | Compatible con `InMemorySaver` / `PostgresSaver` |
-| Difícil de visualizar | Grafo inspeccionable con LangGraph Studio |
+El grafo usa `MemorySaver` como checkpointer, lo que habilita persistencia de estado entre invocaciones por `thread_id`:
+
+```python
+# Conversación con usuario identificado (estado persiste entre mensajes)
+result = system.process("¿Cuántos días de vacaciones tengo?", user_id="usuario-123")
+result = system.process("¿Y si soy part-time?", user_id="usuario-123")  # mismo thread
+
+# Sin user_id → thread_id = trace_id (sin persistencia entre requests)
+result = system.process("¿Cómo configuro la VPN?")
+```
+
+Para persistencia real en producción, reemplazar `MemorySaver` por `PostgresSaver` en `src/graph.py`.
+
+## Evaluación con golden dataset
+
+El proyecto incluye un evaluador sistemático contra un dataset dorado de 12 casos curados:
+
+```bash
+# Evaluación completa (con scoring LLM)
+python golden_evaluator.py
+
+# Sin evaluador LLM (solo routing accuracy + similitud semántica)
+python golden_evaluator.py --no-eval
+
+# Dataset personalizado
+python golden_evaluator.py --dataset mi_dataset.json
+```
+
+Los resultados se guardan en `golden_eval_results.json` y en Langfuse. Métricas reportadas:
+- **Routing accuracy**: % de consultas correctamente derivadas al dominio esperado
+- **Answer pass rate**: % de respuestas que superan el umbral de similitud semántica (≥ 0.80)
+- **Similitud semántica**: coseno entre embeddings de la respuesta y la respuesta esperada
 
 ## Estructura del proyecto
 
@@ -109,11 +134,15 @@ aem3/
 │       ├── test_evaluator.py
 │       └── test_specialized_agents.py
 ├── faiss_index/                    # Índices FAISS persistidos (generado al ejecutar)
-├── htmlcov/                        # Reporte HTML de cobertura (generado al testear)
 ├── main.py                         # Entry point con CLI
+├── golden_evaluator.py             # Evaluador sistemático contra dataset dorado
+├── golden_dataset.json             # 12 casos curados con respuestas esperadas
 ├── test_queries.json               # 12 consultas de prueba con routing esperado
 ├── pytest.ini                      # Configuración de pytest y cobertura
 ├── requirements.txt
+├── requirements-dev.txt            # Herramientas de desarrollo (ruff)
+├── .python-version                 # Python 3.12 (requerido por faiss-cpu)
+├── .github/workflows/ci.yaml       # CI: lint + format + tests con cobertura
 ├── .env.example
 └── README.md
 ```
@@ -245,17 +274,30 @@ El proyecto tiene cobertura del 100% sobre todos los módulos de `src/` y `main.
 ### Correr los tests
 
 ```bash
-# Con reporte de cobertura completo (configurado en pytest.ini)
-python -m pytest
+# Con reporte de cobertura completo
+uv pip install -r requirements.txt -r requirements-dev.txt
+pytest -q --cov=src --cov-report=term-missing
 
 # Sin reporte de cobertura (más rápido)
-python -m pytest --no-cov
+pytest --no-cov
 
 # Un archivo específico
-python -m pytest tests/test_graph.py -v
+pytest tests/test_graph.py -v
 
 # Con output detallado de fallos
-python -m pytest -v --tb=short
+pytest -v --tb=short
+```
+
+### Lint y formato
+
+```bash
+# Corregir automáticamente
+ruff check . --fix
+ruff format .
+
+# Solo verificar (como el CI)
+ruff check .
+ruff format --check .
 ```
 
 ### Estructura de tests
@@ -327,9 +369,42 @@ Sin los documentos recuperados en el prompt del evaluador, la dimensión `accura
 **¿Por qué logging estructurado en lugar de print()?**
 Con `logging` se puede subir el nivel a `WARNING` en producción para silenciar el ruido operativo, o bajar a `DEBUG` con `--debug` para diagnóstico. Con `print()` es todo o nada.
 
+## CI/CD
+
+El pipeline de GitHub Actions (`.github/workflows/ci.yaml`) corre en cada push a `main` y en pull requests:
+
+| Step | Herramienta | Descripción |
+|---|---|---|
+| Lint | `ruff check .` | Verifica errores de estilo e imports |
+| Format | `ruff format --check .` | Verifica formato consistente |
+| Tests | `pytest --cov=src --cov-fail-under=80` | Tests con cobertura mínima del 80% |
+
 ## Limitaciones conocidas
 
 - El sistema está optimizado para consultas en español. Consultas en otros idiomas pueden degradar la calidad del routing.
 - La evaluación agrega ~2-3 segundos y costo adicional de tokens por consulta. Usar `--no-eval` para pruebas rápidas o cuando el volumen de consultas es alto.
-- Python 3.14+ no es compatible con `faiss-cpu`. Usar Python 3.12 o 3.13.
-- Para volúmenes de producción altos, considerar migrar el vector store a Pinecone o pgvector (hosted) en lugar de FAISS local.
+- Python 3.14+ no es compatible con `faiss-cpu`. Usar Python 3.12 (especificado en `.python-version`).
+- Para volúmenes de producción altos, considerar migrar el vector store a Pinecone o pgvector en lugar de FAISS local.
+- `MemorySaver` almacena estado en memoria del proceso. Al reiniciar el servidor, el historial de conversaciones se pierde.
+
+## Próximos pasos
+
+### Alta prioridad
+
+- **Sesiones de usuario con memoria real**: implementar una capa de `session_id` estable que se pase como `user_id` para que `MemorySaver` persista el contexto entre múltiples mensajes del mismo usuario. Para producción, migrar a `PostgresSaver`.
+- **Manejo de errores en golden_evaluator.py**: envolver cada caso en `try/except` para que errores puntuales (timeout de API, red) no interrumpan toda la evaluación y se guarden resultados parciales.
+- **Timeout en `graph.invoke()`**: agregar límite de tiempo para evitar esperas indefinidas ante fallos de la API de OpenAI.
+
+### Media prioridad
+
+- **Validación de input**: rechazar queries vacíos o excesivamente largos antes de invocar el grafo.
+- **Retry con backoff exponencial**: manejar errores 429 (rate limit) de OpenAI sin crashear.
+- **Tests de integración**: agregar tests con `@pytest.mark.integration` que validen el flujo end-to-end con datos reales (marcados para no correr en CI).
+- **Aislación de tests del grafo**: usar un `thread_id` único por test en lugar del `"test-thread"` compartido para evitar dependencias entre tests.
+
+### Baja prioridad
+
+- **Modelo diferenciado por dominio**: usar `gpt-4o` para agentes de Legal y Finance donde la precisión es más crítica.
+- **Caché de queries frecuentes**: reducir costo y latencia para consultas duplicadas o muy similares.
+- **Métricas de routing en Langfuse**: registrar accuracy de routing y latencia por dominio para detectar degradación sistemática.
+- **Edge cases en golden dataset**: agregar casos ambiguos, fuera de dominio y queries que crucen múltiples dominios.
