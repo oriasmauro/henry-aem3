@@ -142,14 +142,14 @@ class TestBuildGraph:
         from src.graph import build_graph
 
         graph = build_graph(_make_orchestrator(), _make_agents(), _make_evaluator())
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
         assert isinstance(result, dict)
 
     def test_graph_without_evaluator_is_invocable(self):
         from src.graph import build_graph
 
         graph = build_graph(_make_orchestrator(), _make_agents(), evaluator=None)
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
         assert isinstance(result, dict)
 
 
@@ -165,7 +165,7 @@ class TestOrchestrateNode:
         orchestrator = _make_orchestrator("hr")
         graph = build_graph(orchestrator, _make_agents(), None)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         orchestrator.classify.assert_called_once()
 
@@ -175,7 +175,7 @@ class TestOrchestrateNode:
         orchestrator = _make_orchestrator("hr")
         graph = build_graph(orchestrator, _make_agents(), None)
 
-        _invoke(graph,_make_initial_state(query="¿Cuántos días de vacaciones?"))
+        _invoke(graph, _make_initial_state(query="¿Cuántos días de vacaciones?"))
 
         call_args = orchestrator.classify.call_args
         assert call_args[0][0] == "¿Cuántos días de vacaciones?"
@@ -186,7 +186,7 @@ class TestOrchestrateNode:
         orchestrator = _make_orchestrator("hr")
         graph = build_graph(orchestrator, _make_agents(), None)
 
-        _invoke(graph,_make_initial_state(trace_id="my-trace-id"))
+        _invoke(graph, _make_initial_state(trace_id="my-trace-id"))
 
         call_kwargs = orchestrator.classify.call_args[1]
         assert call_kwargs["trace_id"] == "my-trace-id"
@@ -197,7 +197,7 @@ class TestOrchestrateNode:
         orchestrator = _make_orchestrator("tech")
         graph = build_graph(orchestrator, _make_agents(), None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["domain"] == "tech"
 
@@ -207,7 +207,7 @@ class TestOrchestrateNode:
         orchestrator = _make_orchestrator("hr", confidence=0.85)
         graph = build_graph(orchestrator, _make_agents(), None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["confidence"] == pytest.approx(0.85)
 
@@ -222,7 +222,7 @@ class TestOrchestrateNode:
         }
         graph = build_graph(orchestrator, _make_agents(), None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["reasoning"] == "Es una consulta de RRHH."
 
@@ -234,7 +234,7 @@ class TestOrchestrateNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["confidence"] == pytest.approx(0.0)
 
@@ -246,7 +246,7 @@ class TestOrchestrateNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["reasoning"] == ""
 
@@ -265,7 +265,7 @@ class TestConditionalRouting:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         agents[domain].run.assert_called_once()
 
@@ -277,7 +277,7 @@ class TestConditionalRouting:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         for other_domain, agent in agents.items():
             if other_domain != domain:
@@ -303,7 +303,7 @@ class TestRagNode:
         }
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["answer"] == "Tienes 15 días de vacaciones."
 
@@ -314,7 +314,7 @@ class TestRagNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["agent_name"] == "HRAgent"
 
@@ -325,7 +325,7 @@ class TestRagNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert "hr_docs/doc.txt" in result["retrieved_docs"]
 
@@ -336,7 +336,7 @@ class TestRagNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["context"] == "Contexto del dominio hr."
 
@@ -347,7 +347,7 @@ class TestRagNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        _invoke(graph,_make_initial_state(query="¿Cuántos días?"))
+        _invoke(graph, _make_initial_state(query="¿Cuántos días?"))
 
         call_args = agents["hr"].run.call_args
         assert call_args[0][0] == "¿Cuántos días?"
@@ -359,7 +359,7 @@ class TestRagNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        _invoke(graph,_make_initial_state(trace_id="my-trace"))
+        _invoke(graph, _make_initial_state(trace_id="my-trace"))
 
         call_kwargs = agents["hr"].run.call_args[1]
         assert call_kwargs["trace_id"] == "my-trace"
@@ -372,7 +372,7 @@ class TestRagNode:
         agents = _make_agents()
         graph = build_graph(orchestrator, agents, None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["agent_name"] == AGENT_NAMES[domain]
 
@@ -389,7 +389,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator(), _make_agents(), evaluator)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         evaluator.evaluate.assert_called_once()
 
@@ -399,7 +399,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator(), _make_agents(), evaluator)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["evaluation"] is not None
         assert result["evaluation"]["overall"] == 9
@@ -409,7 +409,7 @@ class TestEvaluateNode:
 
         graph = build_graph(_make_orchestrator(), _make_agents(), evaluator=None)
 
-        result = _invoke(graph,_make_initial_state())
+        result = _invoke(graph, _make_initial_state())
 
         assert result["evaluation"] is None
 
@@ -419,7 +419,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator(), _make_agents(), evaluator)
 
-        _invoke(graph,_make_initial_state(trace_id="specific-trace"))
+        _invoke(graph, _make_initial_state(trace_id="specific-trace"))
 
         call_kwargs = evaluator.evaluate.call_args[1]
         assert call_kwargs["trace_id"] == "specific-trace"
@@ -437,7 +437,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator("hr"), agents, evaluator)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         call_kwargs = evaluator.evaluate.call_args[1]
         assert call_kwargs["answer"] == "Mi respuesta específica."
@@ -455,7 +455,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator("hr"), agents, evaluator)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         call_kwargs = evaluator.evaluate.call_args[1]
         assert call_kwargs["context"] == "contexto específico del dominio HR"
@@ -467,7 +467,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator("hr"), agents, evaluator)
 
-        _invoke(graph,_make_initial_state())
+        _invoke(graph, _make_initial_state())
 
         call_kwargs = evaluator.evaluate.call_args[1]
         assert call_kwargs["agent_name"] == "HRAgent"
@@ -478,7 +478,7 @@ class TestEvaluateNode:
         evaluator = _make_evaluator()
         graph = build_graph(_make_orchestrator(), _make_agents(), evaluator)
 
-        _invoke(graph,_make_initial_state(query="¿Qué es el onboarding?"))
+        _invoke(graph, _make_initial_state(query="¿Qué es el onboarding?"))
 
         call_kwargs = evaluator.evaluate.call_args[1]
         assert call_kwargs["query"] == "¿Qué es el onboarding?"
@@ -500,8 +500,8 @@ class TestFullPipeline:
         evaluator = _make_evaluator()
         graph = build_graph(orchestrator, agents, evaluator)
 
-        result = _invoke(graph,
-            _make_initial_state(query="¿Cómo presento un gasto?", trace_id="t-123")
+        result = _invoke(
+            graph, _make_initial_state(query="¿Cómo presento un gasto?", trace_id="t-123")
         )
 
         assert result["query"] == "¿Cómo presento un gasto?"
@@ -522,7 +522,7 @@ class TestFullPipeline:
         graph = build_graph(orchestrator, _make_agents(), None)
 
         with pytest.raises(RuntimeError, match="LLM error"):
-            _invoke(graph,_make_initial_state())
+            _invoke(graph, _make_initial_state())
 
     def test_exception_in_rag_propagates(self):
         from src.graph import build_graph
@@ -532,4 +532,4 @@ class TestFullPipeline:
         graph = build_graph(_make_orchestrator("hr"), agents, None)
 
         with pytest.raises(ValueError, match="FAISS error"):
-            _invoke(graph,_make_initial_state())
+            _invoke(graph, _make_initial_state())
