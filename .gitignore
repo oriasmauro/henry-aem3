@@ -32,3 +32,7 @@ faiss_index/
 
 # Logs
 *.log
+
+# Coverage
+.coverage
+htmlcov/

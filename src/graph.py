@@ -6,7 +6,7 @@ Define el StateGraph de LangGraph para el sistema multiagente.
 El grafo modela el flujo como un DAG explícito:
   START → orchestrate → [routing condicional] → {domain}_agent → evaluate → END
 
-Beneficios respecto a la orquestación imperativa anterior:
+Beneficios de esta arquitectura:
 - Estado tipado (AgentState) con todas las claves del pipeline en un TypedDict.
 - Routing declarativo mediante add_conditional_edges: la lógica de rutas es visible
   en la definición del grafo, no enterrada en bloques if/elif.

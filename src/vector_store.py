@@ -22,16 +22,9 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from src.config import CONFIG
+from src.constants import DOMAIN_DIRS
 
 logger = logging.getLogger(__name__)
-
-# Mapeo dominio → carpeta de documentos
-DOMAIN_DIRS: dict[str, str] = {
-    "hr": "hr_docs",
-    "tech": "tech_docs",
-    "finance": "finance_docs",
-    "legal": "legal_docs",
-}
 
 
 def _get_embeddings() -> OpenAIEmbeddings:
