@@ -485,6 +485,134 @@ class TestEvaluateNode:
 
 
 # ---------------------------------------------------------------------------
+# clarification_node
+# ---------------------------------------------------------------------------
+
+
+class TestClarificationNode:
+    def test_low_confidence_routes_to_clarification(self):
+        """Confidence < threshold no llama a ningún agente RAG."""
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        agents = _make_agents()
+        graph = build_graph(orchestrator, agents, None)
+
+        _invoke(graph, _make_initial_state())
+
+        for agent in agents.values():
+            agent.run.assert_not_called()
+
+    def test_unknown_domain_routes_to_clarification(self):
+        """Dominio 'unknown' no llama a ningún agente RAG."""
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("unknown", confidence=0.0)
+        agents = _make_agents()
+        graph = build_graph(orchestrator, agents, None)
+
+        _invoke(graph, _make_initial_state())
+
+        for agent in agents.values():
+            agent.run.assert_not_called()
+
+    def test_clarification_sets_agent_name_to_orchestrator(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert result["agent_name"] == "Orchestrator"
+
+    def test_clarification_answer_contains_domain_options(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert "RRHH" in result["answer"]
+        assert "IT" in result["answer"]
+        assert "Finanzas" in result["answer"]
+        assert "Legal" in result["answer"]
+
+    def test_clarification_answer_contains_confidence_percentage(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.3)
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert "30%" in result["answer"]
+
+    def test_clarification_answer_contains_best_guess_domain(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("finance", confidence=0.2, reasoning="parece financiero")
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert "FINANCE" in result["answer"]
+        assert "parece financiero" in result["answer"]
+
+    def test_clarification_unknown_domain_omits_confidence_and_guess(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("unknown", confidence=0.0)
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert "No pude determinar" in result["answer"]
+
+    def test_clarification_retrieved_docs_is_empty(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert result["retrieved_docs"] == []
+
+    def test_clarification_context_is_empty(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        graph = build_graph(orchestrator, _make_agents(), None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert result["context"] == ""
+
+    def test_clarification_does_not_call_evaluator(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        evaluator = _make_evaluator()
+        graph = build_graph(orchestrator, _make_agents(), evaluator)
+
+        _invoke(graph, _make_initial_state())
+
+        evaluator.evaluate.assert_not_called()
+
+    def test_evaluation_is_none_after_clarification(self):
+        from src.graph import build_graph
+
+        orchestrator = _make_orchestrator("hr", confidence=0.1)
+        graph = build_graph(orchestrator, _make_agents(), evaluator=None)
+
+        result = _invoke(graph, _make_initial_state())
+
+        assert result["evaluation"] is None
+
+
+# ---------------------------------------------------------------------------
 # Flujo completo (estado final coherente)
 # ---------------------------------------------------------------------------
 

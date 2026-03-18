@@ -11,30 +11,48 @@ Un **Agente Orquestador** clasifica la intención de cada consulta (RRHH, IT, Fi
 El flujo de ejecución está modelado como un DAG explícito usando LangGraph:
 
 ```
-Consulta del usuario
-        │
-        ▼
-┌──────────────────────────────────────────────────────┐
-│               LangGraph StateGraph                   │
-│                                                      │
-│  START → orchestrate_node                            │
-│               │                                      │
-│    [add_conditional_edges: route_to_agent]           │
-│               │                                      │
-│    ┌──────────┼──────────────────────┐               │
-│    ▼          ▼          ▼           ▼               │
-│  hr_agent  tech_agent  finance_agent  legal_agent    │
-│  (FAISS)   (FAISS)     (FAISS)        (FAISS)        │
-│    └──────────┴──────────┴────────────┘              │
-│               │                                      │
-│          evaluate_node                               │
-│               │                                      │
-│              END                                     │
-└──────────────────────────────────────────────────────┘
-        │
-        ▼
- EvaluatorAgent → Score API → Langfuse
+User Query
+    │
+    ▼
+┌───────────────────────────────┐
+│   LangGraph StateGraph        │
+└───────────────────────────────┘
+    │
+    ▼
+[orchestrate_node]
+    │
+    ▼
+[route_to_agent]
+    │
+    ├─────────────── valid + high confidence ───────────────┐
+    │                                                       │
+    ▼                                                       ▼
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ hr_agent    │ │ tech_agent  │ │ finance_agent│ │ legal_agent │
+│ (FAISS)     │ │ (FAISS)     │ │ (FAISS)      │ │ (FAISS)     │
+└──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
+       │               │               │               │
+       └───────────────┴───────────────┴───────────────┘
+                           │
+                           ▼
+                     [evaluate_node]
+                           │
+                           ▼
+                          END
+
+    └──── low confidence / unknown domain ─────► [clarification_node]
+                                                   │
+                                                   ▼
+                                             [evaluate_node]
+                                                   │
+                                                   ▼
+                                                  END
+
+Post-processing:
+EvaluatorAgent → Score API → Langfuse
 ```
+
+El nodo `clarification_node` se activa cuando el orquestador clasifica con `confidence < CONFIDENCE_THRESHOLD` (default: 0.4) o retorna un dominio no reconocido. En lugar de rutear silenciosamente a un dominio incorrecto, devuelve un mensaje pidiendo clarificación con las 4 opciones de dominio y la mejor estimación disponible.
 
 ### AgentState (estado tipado)
 
@@ -306,9 +324,9 @@ ruff format --check .
 |---|---|
 | `test_config.py` | Carga de env vars, valores por defecto, error en vars faltantes |
 | `test_vector_store.py` | Carga de docs, construcción de índice, persistencia en disco |
-| `test_graph.py` | `AgentState`, `build_graph`, nodos, routing condicional (4 dominios), evaluate con/sin evaluador |
+| `test_graph.py` | `AgentState`, `build_graph`, nodos, routing condicional (4 dominios + clarificación), evaluate con/sin evaluador |
 | `tests/agents/test_base_rag_agent.py` | `_format_docs`, pipeline RAG, verificación de un solo retrieval |
-| `tests/agents/test_orchestrator.py` | Clasificación, fallback en dominio inválido, umbral de confianza |
+| `tests/agents/test_orchestrator.py` | Clasificación, dominio `unknown` en inválido, umbral de confianza |
 | `tests/agents/test_evaluator.py` | Scoring 4 dimensiones, contexto en el prompt, registro en Langfuse |
 | `tests/agents/test_specialized_agents.py` | Atributos y `run()` de HR, Tech, Finance y Legal agents |
 | `test_multi_agent_system.py` | Pipeline completo, error handling con trace de Langfuse, routing |
@@ -326,8 +344,8 @@ htmlcov/index.html
 
 Cada consulta genera un **trace** en Langfuse con:
 - Span del Orchestrator: clasificación, dominio seleccionado y `confidence`
-- Span del RAG agent: chunks recuperados y respuesta generada
-- Scores del Evaluador: `eval_relevance`, `eval_completeness`, `eval_accuracy`, `eval_overall`
+- Span del RAG agent: chunks recuperados y respuesta generada (solo si confidence ≥ threshold)
+- Scores del Evaluador: `eval_relevance`, `eval_completeness`, `eval_accuracy`, `eval_overall` (no se ejecuta en flujo de clarificación)
 - Nivel `ERROR` en el trace si ocurre una excepción (para incident response)
 
 Al ejecutar, el sistema imprime la URL directa al trace:
@@ -335,7 +353,7 @@ Al ejecutar, el sistema imprime la URL directa al trace:
 Trace: https://cloud.langfuse.com/trace/<trace_id>
 ```
 
-**Tip:** Si `confidence` es baja, el sistema emite un `WARNING` en los logs con el trace ID para facilitar la revisión en Langfuse.
+**Tip:** Si `confidence` es baja o el dominio es desconocido, el sistema emite un `WARNING` en los logs y retorna un mensaje de clarificación al usuario en lugar de una respuesta potencialmente incorrecta. Los traces con `WARNING` son fácilmente identificables en Langfuse para revisión.
 
 ## Decisiones técnicas
 
@@ -392,3 +410,4 @@ El pipeline de GitHub Actions (`.github/workflows/ci.yaml`) corre en cada push a
 - **Modelo diferenciado por dominio**: usar `gpt-4o` para agentes de Legal y Finance donde la precisión es más crítica.
 - **Caché de queries frecuentes**: reducir costo y latencia para consultas duplicadas o muy similares.
 - **Métricas de routing en Langfuse**: registrar accuracy de routing y latencia por dominio para detectar degradación sistemática.
+- **Zona gris con disclaimer**: para consultas con `confidence` entre 0.4 y 0.6, responder con el agente más probable pero incluir un aviso al usuario indicando baja certeza en el routing.

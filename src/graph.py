@@ -5,6 +5,7 @@ Define el StateGraph de LangGraph para el sistema multiagente.
 
 El grafo modela el flujo como un DAG explícito:
   START → orchestrate → [routing condicional] → {domain}_agent → evaluate → END
+                                              └─► clarification_node → END
 
 Beneficios de esta arquitectura:
 - Estado tipado (AgentState) con todas las claves del pipeline en un TypedDict.
@@ -14,6 +15,8 @@ Beneficios de esta arquitectura:
   sin modificar la lógica del orquestador ni de otros agentes.
 - Compatible con checkpointing (InMemorySaver / PostgresSaver) para recuperación
   de estado ante fallos, sin cambios en los nodos.
+- Baja confianza: el nodo clarification_node se activa cuando confidence < threshold
+  o el dominio es "unknown", evitando respuestas incorrectas silenciosas.
 """
 
 import logging
@@ -22,6 +25,8 @@ from typing import Optional
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from typing_extensions import TypedDict
+
+from src.config import CONFIG
 
 logger = logging.getLogger(__name__)
 
@@ -101,6 +106,26 @@ def build_graph(orchestrator, agents: dict, evaluator):
         rag_node.__name__ = f"{domain}_agent"
         return rag_node
 
+    def clarification_node(state: AgentState) -> dict:
+        """Genera mensaje de clarificación cuando la confianza es baja o el dominio es desconocido."""
+        confidence = state["confidence"]
+        if confidence > 0:
+            detail = f"Mi mejor estimación: {state['domain'].upper()} — {state['reasoning']}"
+        else:
+            detail = "No pude determinar el área correspondiente."
+
+        return {
+            "agent_name": "Orchestrator",
+            "answer": (
+                f"No estoy seguro de a qué área corresponde tu consulta"
+                f"{f' (confianza: {confidence:.0%})' if confidence > 0 else ''}. "
+                f"¿Podrías especificar si es sobre RRHH, IT, Finanzas o Legal?\n\n"
+                f"{detail}"
+            ),
+            "retrieved_docs": [],
+            "context": "",
+        }
+
     def evaluate_node(state: AgentState) -> dict:
         """
         Evalúa la respuesta con LLM-as-a-judge.
@@ -123,7 +148,9 @@ def build_graph(orchestrator, agents: dict, evaluator):
     # -----------------------------------------------------------------------
 
     def route_to_agent(state: AgentState) -> str:
-        """Retorna el nombre del nodo destino según el dominio clasificado."""
+        """Retorna el nombre del nodo destino según el dominio clasificado y la confianza."""
+        if state["domain"] == "unknown" or state["confidence"] < CONFIG["confidence_threshold"]:
+            return "clarification"
         return state["domain"]
 
     # -----------------------------------------------------------------------
@@ -139,13 +166,16 @@ def build_graph(orchestrator, agents: dict, evaluator):
     for domain in ("hr", "tech", "finance", "legal"):
         builder.add_node(f"{domain}_agent", make_rag_node(domain))
 
+    # Nodo de clarificación (baja confianza o dominio desconocido)
+    builder.add_node("clarification", clarification_node)
+
     # Nodo de evaluación
     builder.add_node("evaluate", evaluate_node)
 
     # Edges
     builder.add_edge(START, "orchestrate")
 
-    # Routing condicional: orchestrate → agente del dominio correcto
+    # Routing condicional: orchestrate → agente del dominio correcto o clarificación
     builder.add_conditional_edges(
         "orchestrate",
         route_to_agent,
@@ -154,6 +184,7 @@ def build_graph(orchestrator, agents: dict, evaluator):
             "tech": "tech_agent",
             "finance": "finance_agent",
             "legal": "legal_agent",
+            "clarification": "clarification",
         },
     )
 
@@ -162,5 +193,8 @@ def build_graph(orchestrator, agents: dict, evaluator):
         builder.add_edge(f"{domain}_agent", "evaluate")
 
     builder.add_edge("evaluate", END)
+
+    # Clarificación va directo al END (no evalúa: no hay respuesta RAG que juzgar)
+    builder.add_edge("clarification", END)
 
     return builder.compile(checkpointer=MemorySaver())

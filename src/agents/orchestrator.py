@@ -99,14 +99,14 @@ class Orchestrator:
 
         result = json.loads(response.content)
 
-        # Validación defensiva: dominio inválido → fallback a "hr" con confidence bajo
+        # Validación defensiva: dominio inválido → "unknown" para activar clarification_node
         if result.get("domain") not in VALID_DOMAINS:
             logger.warning(
-                "[Orchestrator] Dominio inválido retornado: '%s'. Usando 'hr' como fallback.",
+                "[Orchestrator] Dominio inválido retornado: '%s'. Usando 'unknown'.",
                 result.get("domain"),
             )
-            result["domain"] = "hr"
-            result["confidence"] = 0.1
+            result["domain"] = "unknown"
+            result["confidence"] = 0.0
 
         confidence = result.get("confidence", 0.0)
 
