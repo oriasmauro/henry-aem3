@@ -98,14 +98,14 @@ class TestOrchestratorClassify:
         assert "reasoning" in result
 
     def test_fallback_on_invalid_domain(self):
-        """Dominio inválido → fallback a 'hr' con confidence 0.1."""
+        """Dominio inválido → 'unknown' con confidence 0.0 para activar clarification_node."""
         orc = self._make_orchestrator()
         orc.chain.invoke.return_value = _make_llm_response("invalid_domain", 0.8)
 
         result = orc.classify("Consulta ambigua.")
 
-        assert result["domain"] == "hr"
-        assert result["confidence"] == 0.1
+        assert result["domain"] == "unknown"
+        assert result["confidence"] == 0.0
 
     def test_low_confidence_logs_warning(self, caplog):
         """Confianza < threshold genera un log WARNING."""
